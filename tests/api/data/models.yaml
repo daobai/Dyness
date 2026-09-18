@@ -1,0 +1,24 @@
+# 机型归一化映射表 —— 未来新机型在此追加，无需改代码
+# deviceModel 可能出现的变体 -> 标准系列名
+
+aliases:
+  AquaVolt:
+    - AquaVolt
+    - AV
+  AquaVolt_LV:
+    - AquaVolt_LV
+    - AquaVolt-LV
+    - AquaVolt LV
+  SolarCube:
+    - SolarCube
+    - SolarCube2
+    - SolarCube(2)
+    - SC
+
+# GetDeviceInfBySN 的 deviceModel 可能是具体硬件型号（见接口文档 L481 "D3.6LXC-5"），
+# 按前缀映射到系列。新硬件型号上线时在此追加即可。
+hardware_models:
+  D3.6LXC: AquaVolt
+  D5.0LXC: AquaVolt
+  D800-LHC: SolarCube
+  D2.0-LHC: SolarCube

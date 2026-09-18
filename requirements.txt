@@ -1,0 +1,5 @@
+pymodbus>=3.0
+pytest>=8.0
+requests>=2.31
+jsonpath-ng>=1.6
+pyyaml>=6.0
