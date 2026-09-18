@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# pytest
+.pytest_cache/
+
+# 测试日志与报告
+common/logs/
+common/reports/
+common/backup/
+
+# IDE
+.idea/
+.vscode/
+
+# 系统
+Thumbs.db
+.DS_Store
