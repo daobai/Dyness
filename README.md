@@ -23,10 +23,11 @@ Dyness/
 │       ├── core/               #   API 专属公共库（签名/机型/加载/断言）
 │       ├── data/               #   接口测试数据（正常流 api_testdata.csv + 异常 api_testdata_negative.csv + models.yaml）
 │       ├── README.md           #   ★ API 测试框架详细文档（命令/功能）
+│       ├── gen_api_cases.py    #   生成正常流测试数据 CSV
+│       ├── gen_api_negative_cases.py  # 生成异常/边界测试数据 CSV
 │       ├── conftest.py         #   参数化入口 + fixtures
 │       └── test_api.py         #   执行脚本
 ├── tools/                      # 测试辅助工具 / 桩
-│   ├── gen_api_cases.py        # 由接口文档生成 API 测试数据 CSV
 │   └── modbus/                 # 多设备模拟器（从站桩）
 ├── requirements.txt            # 依赖
 ├── pytest.ini                  # pytest 配置
@@ -58,17 +59,20 @@ Dyness/
 
 ## OpenAPI 接口测试
 
-基于 pytest 的数据驱动测试，覆盖 Dyness OpenAPI（AquaVolt / AquaVolt_LV / SolarCube）查询类 + 控制类接口，支持多设备机型自适应、HMAC-SHA1 自签名鉴权、完整报文日志与 HTML/JSON 报告。
+基于 pytest 的数据驱动测试，覆盖 Dyness OpenAPI 六大产品线（户用储能 AquaVolt/AquaVolt_LV/SolarCube/SolarCube2、Cygni、高压电池、低压电池、Junior Box、工商业）的查询类 + 控制类接口，支持多设备机型自适应、HMAC-SHA1 自签名鉴权、按机型/模块/冒烟三种执行方式、完整报文日志与 HTML/JSON 报告。
 
 - **详细文档、命令、框架说明** → [tests/api/README.md](tests/api/README.md)
+- **接口清单与测试覆盖** → [docs/接口清单.md](docs/接口清单.md)
 - **用例数据字段 / 断言语法** → [tests/api/data/README.md](tests/api/data/README.md)
-- 接口协议 → [docs/interfaces/Dyness_AquaVolt_AquaVolt-LV_SolarCube(2)_Open_API_Protocol_V1.4.md](docs/interfaces/Dyness_AquaVolt_AquaVolt-LV_SolarCube(2)_Open_API_Protocol_V1.4.md)
+- 接口协议 → [docs/interfaces/](docs/interfaces/)（各产品线 Open API Protocol 文档）
 
 快速上手：
 
 ```bat
 # 配置 tests/api/config/config.yaml 后运行
 py -3 -m pytest tests/api -v                 # 跑全部
+py -3 -m pytest tests/api --smoke            # 冒烟（核心查询，不跑下发）
+py -3 -m pytest tests/api --module=commerce  # 按模块
 py -3 -m pytest tests/api -k "GetBaseSetting" # 只跑某个接口
 ```
 

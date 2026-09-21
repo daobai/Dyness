@@ -21,11 +21,28 @@ description: 从接口文档生成 API 自动化测试数据（正常流 api_tes
 更新生成脚本后重新生成 CSV：
 
 ```bat
-py -3 tools/gen_api_cases.py           # 正常流
-py -3 tools/gen_api_negative_cases.py  # 异常/边界
+py -3 tests/api/gen_api_cases.py           # 正常流
+py -3 tests/api/gen_api_negative_cases.py  # 异常/边界
 ```
 
-脚本：`tools/gen_api_cases.py`（正常流）、`tools/gen_api_negative_cases.py`（异常/边界）。
+脚本：`tests/api/gen_api_cases.py`（正常流）、`tests/api/gen_api_negative_cases.py`（异常/边界）。
+
+## 新增接口流程（分工）
+
+新增一个接口时，**框架代码（test_api.py / assertions.py / device.py / backup.py / report.py）完全不用改**，只改两个 gen 脚本。
+
+- **用户提供**：新接口文档（接口路径 + 参数定义：必填/选填、类型、取值范围、枚举、机型差异、嵌套字段），并说明是查询类还是下发类。
+- **AI 改动**：
+  1. 分析参数约束与机型适用性。
+  2. 按本 skill 的测试设计规范设计用例（正常流 + 异常/边界/特殊参数）。
+  3. `tests/api/gen_api_cases.py`：正常流加一条 `c(...)`。
+  4. `tests/api/gen_api_negative_cases.py`：查询类接口在 `_DEVICE_SN_PATHS` 列表加一行（自动生成 deviceSn 异常）；下发类接口按参数补 `neg(...)` 边界/越界/枚举/必填缺失用例。
+  5. 跑两个 gen 脚本重新生成 CSV，再跑 pytest 验证。
+
+示例（新增查询接口 `/v2/GetNewThing`，仅 deviceSn 参数）：
+
+- `gen_api_cases.py` 加：`c("TC019", "xxx查询", "/v2/GetNewThing", {"deviceSn": SN}, "$.code == 200", "查询类:xxx")`
+- `gen_api_negative_cases.py` 的 `_DEVICE_SN_PATHS` 加：`("GetNewThing", "xxx查询")`（自动生成 deviceSn 不存在/空两条异常）
 
 ## CSV 字段
 

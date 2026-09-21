@@ -2,16 +2,18 @@
 # 优先级：命令行参数 > 环境变量 > 本文件
 #   命令行:  --base-url / --app-id / --app-secret / --device-sn / --timeout / --request-interval / --model
 #   环境变量: API_BASE_URL / API_APP_ID / API_APP_SECRET / API_DEVICE_SN / API_TIMEOUT / API_REQUEST_INTERVAL / API_MODEL
+#   ID+密钥  赵星 208821186861056000 60df75ba1afa6f648f9f72df60bfee7  张瑜 71122741661836 1cd200f276b7587429533eff290f299
 api:
   base_url: "https://open-apitest.dyness.cn/openapi/ems-device"   # 接入域名（需含 /openapi/ems-device 前缀）
-  app_id: "71122741661836"                                              # 应用 ID（必填）
-  app_secret: "1cd200f276b7587429533eff290f299"                                      # 应用密钥（必填）
-  device_sn: "6LHC0110800W261040009"                                       # 被测设备序列号；多台用逗号分隔或 YAML 列表，留空=测账号下全部
+  app_id: "208821186861056000"                                              # 应用 ID（必填）
+  app_secret: "60df75ba1afa6f648f9f72df60bfee7"                                      # 应用密钥（必填）
+  device_sn: "6LAC0512500W25C100001"                                       # 被测设备序列号；多台用逗号分隔或 YAML 列表，留空=测账号下全部
   # device_sn: "SN1,SN2,SN3"                                        # 多台（逗号分隔）
   # device_sn: ["SN1", "SN2", "SN3"]                                # 多台（列表）
   timeout: 30                                                       # 请求超时(秒)
   request_interval: 0.6                                             # 请求间隔(秒)，避免触发接口限流(≤2次/秒)
   model: ""                                                         # 手动指定机型(AquaVolt/AquaVolt_LV/SolarCube)，留空=自动探测；探测失败时兜底
+  collector_sn: ""                                                  # 采集器 SN（工商业设备必填）；{{collectorSn}} 模板变量
   headers: {}                                                       # 额外默认请求头
   vars: {}                                                          # 额外模板变量；{{deviceSn}} 由框架按当前设备自动注入
 

@@ -34,6 +34,30 @@ def pytest_addoption(parser):
     parser.addoption("--request-interval", action="store", default=None, help="请求间隔(秒)，控制频率避免触发接口限流")
     parser.addoption("--model", action="store", default=None, help="手动指定机型（AquaVolt/AquaVolt_LV/SolarCube），探测失败时兜底")
     parser.addoption("--no-restore", action="store_true", default=False, help="测试后不恢复设备参数（默认自动恢复）")
+    parser.addoption("--module", action="store", default=None, help="按模块筛选用例（逗号分隔，如 cygni,commerce）")
+    parser.addoption("--smoke", action="store_true", default=False, help="只跑冒烟用例（核心查询，不跑下发）")
+
+
+def pytest_collection_modifyitems(config, items):
+    """按 --module / --smoke 筛选用例（collect 后，不匹配的不执行）。"""
+    module_arg = config.getoption("--module") or ""
+    smoke = config.getoption("--smoke")
+    if not module_arg and not smoke:
+        return
+    modules = {m.strip() for m in module_arg.split(",") if m.strip()}
+    selected = []
+    for item in items:
+        cs = getattr(item, "callspec", None)
+        case = cs.params.get("case") if cs and "case" in cs.params else None
+        if case is None:  # 非 test_api 用例（如 unit test），保留
+            selected.append(item)
+            continue
+        if modules and case.get("module") not in modules:
+            continue
+        if smoke and case.get("smoke") != "1":
+            continue
+        selected.append(item)
+    items[:] = selected
 
 
 def _load_config():
@@ -114,15 +138,15 @@ def pytest_sessionfinish(session, exitstatus):
         try:
             summary = backup.restore_devices(cfg, devices, ROOT_DIR / "common" / "backup")
         except Exception as e:
-            print(f"[恢复] 设备参数恢复异常: {e}")
+            logging.getLogger("api").info("[恢复] 设备参数恢复异常: %s", e)
         else:
-            print("\n[恢复] 设备参数恢复结果:")
+            logging.getLogger("api").info("[恢复] 设备参数恢复结果:")
             for sn, status, results in summary:
                 failed = [r for r in results if r[0] == "fail"]
                 tail = f"（{len(failed)} 个接口失败）" if failed else ""
-                print(f"  {sn}: {status}{tail}")
+                logging.getLogger("api").info("  %s: %s%s", sn, status, tail)
                 for _p, _s, err in failed:
-                    print(f"    - {_p}: {err}")
+                    logging.getLogger("api").info("    - %s: %s", _p, err)
 
 
 @pytest.fixture(scope="session")
@@ -158,8 +182,10 @@ def _discover_devices_cached(config):
         if cached and not config.getoption("--no-restore"):
             try:
                 backup.backup_devices(cfg, cached, ROOT_DIR / "common" / "backup")
+                logging.getLogger("api").info(
+                    "[备份] 设备参数备份完成: %s", "、".join(d["deviceSn"] for d in cached))
             except Exception as e:
-                print(f"[备份] 设备参数备份失败: {e}")
+                logging.getLogger("api").info("[备份] 设备参数备份失败: %s", e)
     return cached
 
 

@@ -106,4 +106,4 @@ CSV 里 body 的 `{{deviceSn}}` 会在运行时替换成**当前被测设备**�
 - 文件编码 UTF-8。
 - JSON 字段（headers / params / body）在 Excel 里直接写 `{"a":1}` 即可，不用管转义。
 - 若用文本编辑器手写，JSON 里的双引号要写成 `""`（CSV 标准转义）。
-- 用例也可用 `py -3 tools/gen_api_cases.py` 重新生成（基于接口文档的完整清单）。
+- 用例也可用 `py -3 tests/api/gen_api_cases.py` 重新生成（基于接口文档的完整清单）。

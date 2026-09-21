@@ -1,7 +1,11 @@
-# 机型归一化映射表 —— 未来新机型在此追加，无需改代码
-# deviceModel 可能出现的变体 -> 标准系列名
+# 机型归一化映射表 —— 依据「硬件型号与所属系列对应关系」整理
+#
+# deviceModel 可能是系列名（走 aliases 精确匹配）或硬件型号（走 hardware_models 前缀匹配）。
+# hardware_models 前缀匹配按插入顺序，第一个 startswith 命中即返回，故「更具体的前缀」须排在更宽的前缀之前。
+# 新硬件型号上线时在此追加即可。
 
 aliases:
+  # 系列别名（deviceModel 返回的系列名变体 -> 标准机型）
   AquaVolt:
     - AquaVolt
     - AV
@@ -11,14 +15,95 @@ aliases:
     - AquaVolt LV
   SolarCube:
     - SolarCube
-    - SolarCube2
-    - SolarCube(2)
     - SC
+  SolarCube2:
+    - SolarCube2
+    - SolarCube 2
+    - SolarCube(2)
 
-# GetDeviceInfBySN 的 deviceModel 可能是具体硬件型号（见接口文档 L481 "D3.6LXC-5"），
-# 按前缀映射到系列。新硬件型号上线时在此追加即可。
 hardware_models:
-  D3.6LXC: AquaVolt
-  D5.0LXC: AquaVolt
+  # ===== SolarCube2（LHC/LAS + -02 后缀，须在 SolarCube 之前）=====
+  D800-LHC-02: SolarCube2
+  D1.2-LHC-02: SolarCube2
+  D2.0-LHC-02: SolarCube2
+  D800-LAS-02: SolarCube2
+  D1.2-LAS-02: SolarCube2
+  D2.0-LAS-02: SolarCube2
+  # ===== SolarCube（LHC/LAS）=====
   D800-LHC: SolarCube
+  D1.2-LHC: SolarCube
   D2.0-LHC: SolarCube
+  D800-LAS: SolarCube
+  D1.2-LAS: SolarCube
+  D2.0-LAS: SolarCube
+  # ===== AquaVolt（LAC）=====
+  D2.5-LAC: AquaVolt
+  D3.6-LAC: AquaVolt
+  # ===== AquaVolt-LV（LXC）=====
+  D3.6LXC: AquaVolt_LV
+  # ===== LS 系列（DLx-K-LS）=====
+  DL3.0K-LS: LS
+  DL3.6K-LS: LS
+  DL5.0K-LS: LS
+  DL6.0K-LS: LS
+  DL8.0K-LS: LS
+  # ===== HT-A 系列（DxK-HT-A）=====
+  D5K-HT-A: HT-A
+  D6K-HT-A: HT-A
+  D8K-HT-A: HT-A
+  D10K-HT-A: HT-A
+  D12K-HT-A: HT-A
+  D15K-HT-A: HT-A
+  # ===== Cygni 系列 =====
+  Cygni: Cygni
+  # ===== D8.0/D12.0HS 系列 =====
+  D8.0HS: D8/D12HS
+  D12.0HS: D8/D12HS
+  # ===== HT6-15K 系列（TXxK-HT）=====
+  TX: HT6-15K
+  # ===== Solar Mate 系列（DxK-PVC）=====
+  D5K-PVC: SolarMate
+  D6K-PVC: SolarMate
+  D8K-PVC: SolarMate
+  D10K-PVC: SolarMate
+  D12K-PVC: SolarMate
+  # ===== DC-Volt 系列（DxK-DCP）=====
+  D6.0K-DCP: DC-Volt
+  D12.0K-DCP: DC-Volt
+  # ===== AR Series 系列（AR 前缀）=====
+  AR: ARSeries
+  # ===== Power Station 系列（PPS 前缀）=====
+  PPS: PowerStation
+  # ===== DYNE 系列 =====
+  DYNE: DYNE
+  # ===== BF100 系列（BF100 前缀，须在工商业的 BF 之前）=====
+  BF100: BF100
+  # ===== 工商业系列 =====
+  DH: 工商业
+  BF: 工商业
+  STACK X: 工商业
+  PowerDM: 工商业
+  汇流柜: 工商业
+  切换柜: 工商业
+  # ===== MATRIX 系列（MT/MS 前缀）=====
+  MT: MATRIX
+  MS: MATRIX
+  # ===== Orion 系列 =====
+  Orion: Orion
+  # ===== PowerRack HV4 系列 =====
+  BDU100: PowerRack_HV4
+  # ===== Stack 系列（更具体优先）=====
+  Stack100 Pro: Stack100Pro
+  Stack100: Stack100
+  Stack280: Stack280
+  Stack314: Stack314
+  # ===== Tower 系列（更具体优先）=====
+  Tower S3: Tower_S3
+  Tower Pro: Tower_Pro
+  Tower-US: Tower-US
+  Tower: Tower
+  # ===== 低压电池系列 =====
+  DL5.0F: 低压电池
+  PowerDepot: 低压电池
+  Powerbox: 低压电池
+  PowerBrick: 低压电池

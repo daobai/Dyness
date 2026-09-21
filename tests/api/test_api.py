@@ -28,11 +28,9 @@ from core.sign import sign_request
 
 log = logging.getLogger("api")
 
-# 正常流 + 异常/边界/特殊参数用例，分别存放、合并加载（异常文件不存在则忽略）
-CSV_FILES = [
-    Path(__file__).parent / "data" / "api_testdata.csv",
-    Path(__file__).parent / "data" / "api_testdata_negative.csv",
-]
+# 读取 data/ 目录下所有用例 CSV（按模块分文件），合并加载
+CSV_DIR = Path(__file__).parent / "data"
+CSV_FILES = sorted(CSV_DIR.glob("*.csv"))
 
 CASES = []
 for _csv in CSV_FILES:
@@ -89,7 +87,8 @@ def test_api(http_session, cfg, case, device):
     assertions = filter_assertions(case["assertions"], model)
 
     # 3. 模板变量替换（{{deviceSn}} -> 当前设备的 SN）
-    vars_map = {**(cfg.get("vars") or {}), "deviceSn": device["deviceSn"]}
+    vars_map = {**(cfg.get("vars") or {}), "deviceSn": device["deviceSn"],
+                "collectorSn": cfg.get("collector_sn", "")}
     body = resolve_vars(case["body"], vars_map)
     params = resolve_vars(case["params"], vars_map)
 

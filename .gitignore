@@ -12,6 +12,9 @@ common/logs/
 common/reports/
 common/backup/
 
+# 保密文档（含接口/设备数据，不入库）
+docs/interfaces/*.md
+
 # IDE
 .idea/
 .vscode/

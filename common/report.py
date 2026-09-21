@@ -57,6 +57,13 @@ def _parse_code_mismatch(error):
     return (m.group(1), m.group(2)) if m else (None, None)
 
 
+def _resp_info(r):
+    """从响应体提取 info 字段（如 NETWORK_ERROR / Request parameter exception）。"""
+    body = (r.get("response") or {}).get("body") or ""
+    m = re.search(r'"info"\s*:\s*"([^"]*)"', body)
+    return m.group(1) if m else ""
+
+
 def _case_category(r):
     """从 description 提取用例类别（冒号前缀）；无则归「其他」。"""
     desc = (r.get("description") or "").strip()
@@ -102,7 +109,13 @@ def build_conclusion(results=None):
             elif exp == "500" and act == "200":
                 key = "参数校验缺失(预期500实际200)"
             elif exp == "200" and act == "500":
-                key = "正常/边界值被拒(预期200实际500)"
+                info = _resp_info(r)
+                if info == "NETWORK_ERROR":
+                    key = "设备通信错误(NETWORK_ERROR)"
+                elif info == "Request parameter exception":
+                    key = "参数错误(Request parameter exception)"
+                else:
+                    key = "正常/边界值被拒(预期200实际500)"
             elif exp and act:
                 key = f"业务码不符(预期{exp}实际{act})"
             else:

@@ -59,6 +59,8 @@ def load_cases(csv_file):
             "assertions": (row.get("assertions") or "").strip(),
             "description": (row.get("description") or "").strip(),
             "models": parse_models(row.get("models")),
+            "module": (row.get("module") or "").strip(),
+            "smoke": (row.get("smoke") or "").strip(),
         })
     return cases
 

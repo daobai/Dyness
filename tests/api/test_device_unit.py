@@ -13,20 +13,51 @@ from core.device import (
 
 
 def test_normalize_model_aliases():
-    assert normalize_model("SolarCube2") == "SolarCube"
-    assert normalize_model("SolarCube(2)") == "SolarCube"
+    assert normalize_model("SolarCube2") == "SolarCube2"
+    assert normalize_model("SolarCube(2)") == "SolarCube2"
+    assert normalize_model("SolarCube 2") == "SolarCube2"
     assert normalize_model("SC") == "SolarCube"
     assert normalize_model("AquaVolt-LV") == "AquaVolt_LV"
     assert normalize_model("AV") == "AquaVolt"
 
 
 def test_normalize_model_hardware():
-    assert normalize_model("D3.6LXC-5") == "AquaVolt"
-    assert normalize_model("D5.0LXC-8") == "AquaVolt"
-    # SolarCube 子型号（LHC 系列）
+    # SolarCube2（LHC/LAS + -02，须优先于 SolarCube）
+    assert normalize_model("D800-LHC-02") == "SolarCube2"
+    assert normalize_model("D1.2-LHC-02") == "SolarCube2"
+    assert normalize_model("D2.0-LHC-02") == "SolarCube2"
+    assert normalize_model("D800-LAS-02") == "SolarCube2"
+    assert normalize_model("D1.2-LAS-02") == "SolarCube2"
+    assert normalize_model("D2.0-LAS-02") == "SolarCube2"
+    # SolarCube（LHC/LAS）
     assert normalize_model("D800-LHC") == "SolarCube"
+    assert normalize_model("D1.2-LHC") == "SolarCube"
     assert normalize_model("D2.0-LHC") == "SolarCube"
-    assert normalize_model("D800-LHC-02") == "SolarCube"
+    assert normalize_model("D800-LAS") == "SolarCube"
+    assert normalize_model("D1.2-LAS") == "SolarCube"
+    assert normalize_model("D2.0-LAS") == "SolarCube"
+    # AquaVolt（LAC）
+    assert normalize_model("D2.5-LAC") == "AquaVolt"
+    assert normalize_model("D3.6-LAC") == "AquaVolt"
+    # AquaVolt-LV（LXC）
+    assert normalize_model("D3.6LXC-5") == "AquaVolt_LV"
+    # 其他系列（抽查）
+    assert normalize_model("DL5.0K-LS") == "LS"
+    assert normalize_model("D8K-HT-A") == "HT-A"
+    assert normalize_model("Cygni 5.0HS") == "Cygni"
+    assert normalize_model("D12.0HS") == "D8/D12HS"
+    assert normalize_model("TX8K-HT") == "HT6-15K"
+    assert normalize_model("D5K-PVC") == "SolarMate"
+    assert normalize_model("D6.0K-DCP") == "DC-Volt"
+    assert normalize_model("AR2.5-24V") == "ARSeries"
+    assert normalize_model("PPS1800") == "PowerStation"
+    assert normalize_model("DYNE 5.0L-1P-A") == "DYNE"
+    assert normalize_model("BF100-C100E") == "BF100"
+    assert normalize_model("DH200Y") == "工商业"
+    assert normalize_model("Stack100") == "Stack100"
+    assert normalize_model("Stack100 Pro-3S") == "Stack100Pro"
+    assert normalize_model("Tower S3 T7") == "Tower_S3"
+    assert normalize_model("PowerDepot G2") == "低压电池"
 
 
 def test_normalize_model_unknown_falls_back():
@@ -46,7 +77,7 @@ def test_parse_models():
     assert parse_models("") is None
     assert parse_models(None) is None
     assert parse_models("AquaVolt,SolarCube") == {"AquaVolt", "SolarCube"}
-    assert parse_models("SolarCube2") == {"SolarCube"}  # 归一化
+    assert parse_models("SolarCube2") == {"SolarCube2"}  # 归一化
 
 
 def test_model_matches():

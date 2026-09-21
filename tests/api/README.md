@@ -75,6 +75,24 @@ py -3 -m pytest tests/api -v --device-sn SN1,SN2,SN3
 # 测账号下全部设备（config.yaml 里 device_sn 留空）
 ```
 
+### 按机型 / 按模块 / 冒烟（三种执行方式）
+
+```bat
+# 按设备型号（自动探测机型，跑对应产品线用例）
+py -3 -m pytest tests/api -v --device-sn 你的设备SN
+
+# 按模块（1 个或多个，逗号分隔）
+py -3 -m pytest tests/api -v --module=commerce
+py -3 -m pytest tests/api -v --module=lowvoltage,highvoltage
+
+# 冒烟（只跑核心查询，不跑下发）
+py -3 -m pytest tests/api -v --smoke
+```
+
+**跑某个型号（如 AquaVolt）**：把 `config.yaml` 的 `device_sn` 改成该型号设备 SN（AquaVolt 硬件型号 `D2.5-LAC`/`D3.6-LAC`，SN 第 2/3/4 位为 `LAC`），框架自动探测机型并按 `models` 列匹配用例；探测失败可用 `--model=AquaVolt` 兜底。
+
+模块（module）与产品线对应：户用储能 `household`、Cygni `cygni`、高压电池 `highvoltage`、低压电池 `lowvoltage`、Junior Box `juniorbox`、工商业 `commerce`。
+
 ### 参数覆盖（优先级高于 config.yaml）
 
 ```bat
@@ -165,30 +183,11 @@ Authorization  = "API {appId}:{sign}"
 
 ## 接口清单
 
-| 用例ID | 接口 | 类型 | 默认 |
-|--------|------|------|------|
-| TC001 | GetDeviceList | 查询 | 启用 |
-| TC002 | GetDeviceInfBySN | 查询 | 启用 |
-| TC003 | GetStatusInfBySN | 查询 | 启用 |
-| TC004 | GetRealTimeDataBySN | 查询 | 启用 |
-| TC005 | GetTotalEnergyDataBySN | 查询 | 启用 |
-| TC006 | GetAlarmInfBySN | 查询 | 启用 |
-| TC007 | GetBaseSetting | 控制-查询 | 启用 |
-| TC009 | GetWorkModeSetting | 控制-查询 | 启用 |
-| TC011 | GetBatterySetting | 控制-查询 | 启用 |
-| TC013 | GetLoadControlSetting | 控制-查询 | 启用 |
-| TC015 | GetPeakControlSetting | 控制-查询 | 启用 |
-| TC017 | GetAdvancedSetting | 控制-查询 | 启用 |
-| TC008 | SetBaseSetting | 控制-下发 | 启用 |
-| TC010 | SetWorkModeSetting | 控制-下发 | 启用 |
-| TC012 | SetBatterySetting | 控制-下发 | 启用 |
-| TC014 | SetLoadControlSetting | 控制-下发 | 启用 |
-| TC016 | SetPeakControlSetting | 控制-下发 | 启用 |
-| TC018 | SetAdvancedSetting | 控制-下发 | 启用 |
+完整接口清单与各产品线测试覆盖情况（26 个接口、6 个产品线、用例数统计）见 [`docs/接口清单.md`](../../docs/接口清单.md)。
 
 ## 控制类下发接口
 
-下发接口会**真实修改设备参数**。当前已全部启用（`enabled=1`，随 18 个接口一起执行）；如只想跑查询类，把 `api_testdata.csv` 里对应下发行的 `enabled` 改成 `0`（或改 `tools/gen_api_cases.py` 里的 `"1"` 后重新生成）。
+下发接口会**真实修改设备参数**。当前已全部启用（`enabled=1`，随 18 个接口一起执行）；如只想跑查询类，把 `api_testdata.csv` 里对应下发行的 `enabled` 改成 `0`（或改 `tests/api/gen_api_cases.py` 里的 `"1"` 后重新生成）。
 
 ## 测试环境备份与恢复
 
@@ -206,7 +205,7 @@ Authorization  = "API {appId}:{sign}"
 用例清单可由接口文档批量生成/更新：
 
 ```bat
-py -3 tools/gen_api_cases.py
+py -3 tests/api/gen_api_cases.py
 ```
 
-生成脚本：`tools/gen_api_cases.py`，输出到 `data/api_testdata.csv`。
+生成脚本：`tests/api/gen_api_cases.py`，输出到 `data/api_testdata.csv`。
