@@ -13,21 +13,68 @@ from pathlib import Path
 OUT = Path(__file__).resolve().parent / "data" / "api_household_negative.csv"
 FIELDS = ["case_id", "name", "method", "path", "headers", "params", "body",
           "expected_status", "expected_code", "assertions", "description", "enabled",
-          "models", "module", "smoke"]
+          "models", "module", "func_module", "risk", "smoke"]
 
 SN = "{{deviceSn}}"            # 模板变量，运行时替换为当前设备 SN
 BAD_SN = "NOT_EXIST_SN_000"    # 不存在的设备序列号
 
+# 接口路径 -> 功能模块映射（一级模块/二级模块 层级格式，详见 config/biz_module_tree.md）
+_FUNC_MODULE_MAP = {
+    # 电站中心
+    "GetDeviceList": "电站中心/电站管理",
+    "GetDeviceInfBySN": "电站中心/设备管理",
+    "GetStatusInfBySN": "电站中心/设备管理",
+    "GetRealTimeDataBySN": "电站中心/数据查询",
+    "GetTotalEnergyDataBySN": "电站中心/数据查询",
+    "GetAlarmInfBySN": "电站中心/告警管理",
+    "GetParallelInfBySN": "电站中心/设备管理",
+    # 设备参数配置
+    "GetBaseSetting": "设备参数配置/安规国家设置",
+    "SetBaseSetting": "设备参数配置/安规国家设置",
+    "GetWorkModeSetting": "设备参数配置/工作模式设置",
+    "SetWorkModeSetting": "设备参数配置/工作模式设置",
+    "GetBatterySetting": "设备参数配置/电池参数设置",
+    "SetBatterySetting": "设备参数配置/电池参数设置",
+    "GetLoadControlSetting": "设备参数配置/负载控制设置",
+    "SetLoadControlSetting": "设备参数配置/负载控制设置",
+    "GetPeakControlSetting": "设备参数配置/峰值控制设置",
+    "SetPeakControlSetting": "设备参数配置/峰值控制设置",
+    "GetAdvancedSetting": "设备参数配置/高级参数设置",
+    "SetAdvancedSetting": "设备参数配置/高级参数设置",
+}
+
+
+def _get_risk(path, body):
+    """根据接口路径和请求体判断风险等级。"""
+    api_name = path.rstrip("/").split("/")[-1]
+    if not isinstance(body, dict):
+        return ""
+    # 工商业高级设置 - systemReset/reset/faultReset 参数
+    if api_name == "SetCommerceAdvancedSetting":
+        if "systemReset" in body or "reset" in body or "faultReset" in body:
+            return "danger"
+    # 户用高级参数 - systemReset 参数
+    if api_name == "SetAdvancedSetting":
+        if "systemReset" in body:
+            return "danger"
+    return ""
+
+
+def _get_func_module(path):
+    """根据接口路径推断功能模块。"""
+    api_name = path.rstrip("/").split("/")[-1]
+    return _FUNC_MODULE_MAP.get(api_name, "")
+
 
 def neg(case_id, name, path, body, description, expected_code="500", enabled="1", models="",
-        module="household", smoke="0"):
+        module="household", risk="", smoke="0"):
     """异常用例：默认预期业务码 500（参数错误），HTTP 状态码仍 200。"""
     return {
         "case_id": case_id, "name": name, "method": "POST", "path": path,
         "headers": None, "params": None, "body": body,
         "expected_status": 200, "expected_code": expected_code,
         "assertions": "", "description": description, "enabled": enabled, "models": models,
-        "module": module, "smoke": smoke,
+        "module": module, "func_module": _get_func_module(path), "risk": risk or _get_risk(path, body), "smoke": smoke,
     }
 
 

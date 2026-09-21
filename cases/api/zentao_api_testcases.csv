@@ -1,0 +1,3626 @@
+﻿所属产品,所属模块,用例标题,前置条件,步骤,预期,优先级,用例类型,适用阶段,关键词
+Dyness API,Dyness Open API/工商业储能/系统设置,TC001 工商业系统设置下发,已获取访问凭证,"1. 调用 POST /v2/SetCommerceSystemSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""controlMode"": ""1"",
+  ""controlWay"": ""2"",
+  ""operateMode"": ""2"",
+  ""powerMargin"": ""80"",
+  ""backwashSet"": ""1""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC001,工商业储能/系统设置,工商业"
+Dyness API,Dyness Open API/工商业储能/电池参数,TC002 工商业电池参数下发,已获取访问凭证,"1. 调用 POST /v2/SetCommerceBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""socProtectEnable"": ""1"",
+  ""maxChargeEndSoc"": ""95"",
+  ""minDisChargeEndSoc"": ""20"",
+  ""offGridCutoffSoc"": ""15""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC002,工商业储能/电池参数,工商业"
+Dyness API,Dyness Open API/工商业储能/运行模式,TC003 工商业运行模式下发,已获取访问凭证,"1. 调用 POST /v2/SetCommerceRunModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""operateMode"": ""0""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC003,工商业储能/运行模式,工商业"
+Dyness API,Dyness Open API/工商业储能/峰谷时段,TC004 工商业峰谷时段下发,已获取访问凭证,"1. 调用 POST /v2/SetCommercePeakValleyPeriodSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""electricityPriceTimeRanges"": [
+    {
+      ""startTime"": ""08:00"",
+      ""price"": ""0.2"",
+      ""priceGroup"": ""1"",
+      ""timeType"": 1
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC004,工商业储能/峰谷时段,工商业"
+Dyness API,Dyness Open API/工商业储能/高级设置,TC005 工商业高级设置下发,已获取访问凭证,"1. 调用 POST /v2/SetCommerceAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""faultReset"": ""3""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",4,接口测试,功能测试,"TC005,工商业储能/高级设置,工商业,[危险]"
+Dyness API,Dyness Open API/工商业储能/系统设置,TC101 工商业系统设置-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/SetCommerceSystemSetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000"",
+  ""collectorSn"": ""{{collectorSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC101,工商业储能/系统设置,工商业"
+Dyness API,Dyness Open API/工商业储能/电池参数,TC102 工商业电池参数-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/SetCommerceBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000"",
+  ""collectorSn"": ""{{collectorSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC102,工商业储能/电池参数,工商业"
+Dyness API,Dyness Open API/工商业储能/运行模式,TC103 工商业运行模式-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/SetCommerceRunModeSetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000"",
+  ""collectorSn"": ""{{collectorSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC103,工商业储能/运行模式,工商业"
+Dyness API,Dyness Open API/工商业储能/峰谷时段,TC104 工商业峰谷时段-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/SetCommercePeakValleyPeriodSetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC104,工商业储能/峰谷时段,工商业"
+Dyness API,Dyness Open API/工商业储能/高级设置,TC105 工商业高级设置-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/SetCommerceAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000"",
+  ""collectorSn"": ""{{collectorSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC105,工商业储能/高级设置,工商业"
+Dyness API,Dyness Open API/工商业储能/系统设置,TC106 工商业系统设置-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/SetCommerceSystemSetting
+2. 请求体：{
+  ""deviceSn"": """",
+  ""collectorSn"": ""{{collectorSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC106,工商业储能/系统设置,工商业"
+Dyness API,Dyness Open API/工商业储能/电池参数,TC107 工商业电池参数-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/SetCommerceBatterySetting
+2. 请求体：{
+  ""deviceSn"": """",
+  ""collectorSn"": ""{{collectorSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC107,工商业储能/电池参数,工商业"
+Dyness API,Dyness Open API/工商业储能/运行模式,TC108 工商业运行模式-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/SetCommerceRunModeSetting
+2. 请求体：{
+  ""deviceSn"": """",
+  ""collectorSn"": ""{{collectorSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC108,工商业储能/运行模式,工商业"
+Dyness API,Dyness Open API/工商业储能/峰谷时段,TC109 工商业峰谷时段-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/SetCommercePeakValleyPeriodSetting
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC109,工商业储能/峰谷时段,工商业"
+Dyness API,Dyness Open API/工商业储能/高级设置,TC110 工商业高级设置-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/SetCommerceAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": """",
+  ""collectorSn"": ""{{collectorSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC110,工商业储能/高级设置,工商业"
+Dyness API,Dyness Open API/工商业储能/系统设置,TC111 工商业系统设置-缺collectorSn,已获取访问凭证,"1. 调用 POST /v2/SetCommerceSystemSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC111,工商业储能/系统设置,工商业"
+Dyness API,Dyness Open API/工商业储能/电池参数,TC112 工商业电池参数-缺collectorSn,已获取访问凭证,"1. 调用 POST /v2/SetCommerceBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC112,工商业储能/电池参数,工商业"
+Dyness API,Dyness Open API/工商业储能/运行模式,TC113 工商业运行模式-缺collectorSn,已获取访问凭证,"1. 调用 POST /v2/SetCommerceRunModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC113,工商业储能/运行模式,工商业"
+Dyness API,Dyness Open API/工商业储能/高级设置,TC115 工商业高级设置-缺collectorSn,已获取访问凭证,"1. 调用 POST /v2/SetCommerceAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC115,工商业储能/高级设置,工商业"
+Dyness API,Dyness Open API/工商业储能/系统设置,TC121 工商业系统设置-controlMode越界,已获取访问凭证,"1. 调用 POST /v2/SetCommerceSystemSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""controlMode"": ""3""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC121,工商业储能/系统设置,工商业"
+Dyness API,Dyness Open API/工商业储能/系统设置,TC122 工商业系统设置-controlWay越界,已获取访问凭证,"1. 调用 POST /v2/SetCommerceSystemSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""controlWay"": ""3""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC122,工商业储能/系统设置,工商业"
+Dyness API,Dyness Open API/工商业储能/系统设置,TC123 工商业系统设置-operateMode越界,已获取访问凭证,"1. 调用 POST /v2/SetCommerceSystemSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""operateMode"": ""7""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC123,工商业储能/系统设置,工商业"
+Dyness API,Dyness Open API/工商业储能/系统设置,TC124 工商业系统设置-powerMargin越界小,已获取访问凭证,"1. 调用 POST /v2/SetCommerceSystemSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""powerMargin"": ""1.4""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC124,工商业储能/系统设置,工商业"
+Dyness API,Dyness Open API/工商业储能/系统设置,TC125 工商业系统设置-powerMargin越界大,已获取访问凭证,"1. 调用 POST /v2/SetCommerceSystemSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""powerMargin"": ""10.1""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC125,工商业储能/系统设置,工商业"
+Dyness API,Dyness Open API/工商业储能/电池参数,TC131 工商业电池参数-socProtectEnable非法,已获取访问凭证,"1. 调用 POST /v2/SetCommerceBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""socProtectEnable"": ""2""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC131,工商业储能/电池参数,工商业"
+Dyness API,Dyness Open API/工商业储能/电池参数,TC132 工商业电池参数-offGridCutoffSoc最小值,已获取访问凭证,"1. 调用 POST /v2/SetCommerceBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""offGridCutoffSoc"": ""5""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC132,工商业储能/电池参数,工商业"
+Dyness API,Dyness Open API/工商业储能/电池参数,TC133 工商业电池参数-offGridCutoffSoc最大值,已获取访问凭证,"1. 调用 POST /v2/SetCommerceBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""offGridCutoffSoc"": ""50""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC133,工商业储能/电池参数,工商业"
+Dyness API,Dyness Open API/工商业储能/电池参数,TC134 工商业电池参数-offGridCutoffSoc越界小,已获取访问凭证,"1. 调用 POST /v2/SetCommerceBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""offGridCutoffSoc"": ""4""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC134,工商业储能/电池参数,工商业"
+Dyness API,Dyness Open API/工商业储能/电池参数,TC135 工商业电池参数-offGridCutoffSoc越界大,已获取访问凭证,"1. 调用 POST /v2/SetCommerceBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""offGridCutoffSoc"": ""51""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC135,工商业储能/电池参数,工商业"
+Dyness API,Dyness Open API/工商业储能/电池参数,TC136 工商业电池参数-maxChargeEndSoc越界,已获取访问凭证,"1. 调用 POST /v2/SetCommerceBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""maxChargeEndSoc"": ""101""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC136,工商业储能/电池参数,工商业"
+Dyness API,Dyness Open API/工商业储能/电池参数,TC137 工商业电池参数-backupPowerSocEnable非法,已获取访问凭证,"1. 调用 POST /v2/SetCommerceBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""backupPowerSocEnable"": ""2""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC137,工商业储能/电池参数,工商业"
+Dyness API,Dyness Open API/工商业储能/运行模式,TC141 工商业运行模式-operateMode最小值,已获取访问凭证,"1. 调用 POST /v2/SetCommerceRunModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""operateMode"": ""0""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC141,工商业储能/运行模式,工商业"
+Dyness API,Dyness Open API/工商业储能/运行模式,TC142 工商业运行模式-operateMode最大值,已获取访问凭证,"1. 调用 POST /v2/SetCommerceRunModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""operateMode"": ""5""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC142,工商业储能/运行模式,工商业"
+Dyness API,Dyness Open API/工商业储能/运行模式,TC143 工商业运行模式-operateMode越界,已获取访问凭证,"1. 调用 POST /v2/SetCommerceRunModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""operateMode"": ""6""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC143,工商业储能/运行模式,工商业"
+Dyness API,Dyness Open API/工商业储能/运行模式,TC144 工商业运行模式-operateModeC260越界,已获取访问凭证,"1. 调用 POST /v2/SetCommerceRunModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""operateModeC260"": ""7""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC144,工商业储能/运行模式,工商业"
+Dyness API,Dyness Open API/工商业储能/运行模式,TC145 工商业运行模式-threePartyVppOperateMode越界,已获取访问凭证,"1. 调用 POST /v2/SetCommerceRunModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""threePartyVppOperateMode"": ""4""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC145,工商业储能/运行模式,工商业"
+Dyness API,Dyness Open API/工商业储能/运行模式,TC146 工商业运行模式-timingMode越界,已获取访问凭证,"1. 调用 POST /v2/SetCommerceRunModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""timingMode"": ""3""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC146,工商业储能/运行模式,工商业"
+Dyness API,Dyness Open API/工商业储能/峰谷时段,TC151 工商业峰谷时段-month最小值,已获取访问凭证,"1. 调用 POST /v2/SetCommercePeakValleyPeriodSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""month"": ""1""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC151,工商业储能/峰谷时段,工商业"
+Dyness API,Dyness Open API/工商业储能/峰谷时段,TC152 工商业峰谷时段-month最大值,已获取访问凭证,"1. 调用 POST /v2/SetCommercePeakValleyPeriodSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""month"": ""12""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC152,工商业储能/峰谷时段,工商业"
+Dyness API,Dyness Open API/工商业储能/峰谷时段,TC153 工商业峰谷时段-month越界,已获取访问凭证,"1. 调用 POST /v2/SetCommercePeakValleyPeriodSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""month"": ""13""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC153,工商业储能/峰谷时段,工商业"
+Dyness API,Dyness Open API/工商业储能/峰谷时段,TC154 工商业峰谷时段-priceGroup越界,已获取访问凭证,"1. 调用 POST /v2/SetCommercePeakValleyPeriodSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""priceGroup"": ""5""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC154,工商业储能/峰谷时段,工商业"
+Dyness API,Dyness Open API/工商业储能/峰谷时段,TC155 工商业峰谷时段-timeType越界,已获取访问凭证,"1. 调用 POST /v2/SetCommercePeakValleyPeriodSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""timeType"": ""4""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC155,工商业储能/峰谷时段,工商业"
+Dyness API,Dyness Open API/工商业储能/峰谷时段,TC156 工商业峰谷时段-timeType越界小,已获取访问凭证,"1. 调用 POST /v2/SetCommercePeakValleyPeriodSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""timeType"": ""-2""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC156,工商业储能/峰谷时段,工商业"
+Dyness API,Dyness Open API/工商业储能/高级设置,TC161 工商业高级设置-reset越界小,已获取访问凭证,"1. 调用 POST /v2/SetCommerceAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""reset"": ""3""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",4,接口测试,功能测试,"TC161,工商业储能/高级设置,工商业,[危险]"
+Dyness API,Dyness Open API/工商业储能/高级设置,TC162 工商业高级设置-reset越界大,已获取访问凭证,"1. 调用 POST /v2/SetCommerceAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""reset"": ""7""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",4,接口测试,功能测试,"TC162,工商业储能/高级设置,工商业,[危险]"
+Dyness API,Dyness Open API/工商业储能/高级设置,TC163 工商业高级设置-faultReset非法,已获取访问凭证,"1. 调用 POST /v2/SetCommerceAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""faultReset"": ""9""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",4,接口测试,功能测试,"TC163,工商业储能/高级设置,工商业,[危险]"
+Dyness API,Dyness Open API/工商业储能/高级设置,TC164 工商业高级设置-systemReset正常值,已获取访问凭证,"1. 调用 POST /v2/SetCommerceAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""systemReset"": ""1""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",4,接口测试,功能测试,"TC164,工商业储能/高级设置,工商业,[危险]"
+Dyness API,Dyness Open API/工商业储能/高级设置,TC165 工商业高级设置-systemReset越界小,已获取访问凭证,"1. 调用 POST /v2/SetCommerceAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""systemReset"": ""0""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",4,接口测试,功能测试,"TC165,工商业储能/高级设置,工商业,[危险]"
+Dyness API,Dyness Open API/工商业储能/高级设置,TC166 工商业高级设置-systemReset越界大,已获取访问凭证,"1. 调用 POST /v2/SetCommerceAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""systemReset"": ""2""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",4,接口测试,功能测试,"TC166,工商业储能/高级设置,工商业,[危险]"
+Dyness API,Dyness Open API/工商业储能/系统设置,TC171 工商业系统设置-controlMode=0,已获取访问凭证,"1. 调用 POST /v2/SetCommerceSystemSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""controlMode"": ""0""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC171,工商业储能/系统设置,工商业"
+Dyness API,Dyness Open API/工商业储能/系统设置,TC172 工商业系统设置-controlMode=1,已获取访问凭证,"1. 调用 POST /v2/SetCommerceSystemSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""controlMode"": ""1""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC172,工商业储能/系统设置,工商业"
+Dyness API,Dyness Open API/工商业储能/系统设置,TC173 工商业系统设置-controlMode=2,已获取访问凭证,"1. 调用 POST /v2/SetCommerceSystemSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""controlMode"": ""2""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC173,工商业储能/系统设置,工商业"
+Dyness API,Dyness Open API/工商业储能/系统设置,TC174 工商业系统设置-controlWay=0,已获取访问凭证,"1. 调用 POST /v2/SetCommerceSystemSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""controlMode"": ""1"",
+  ""controlWay"": ""0""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC174,工商业储能/系统设置,工商业"
+Dyness API,Dyness Open API/工商业储能/系统设置,TC175 工商业系统设置-controlWay=1,已获取访问凭证,"1. 调用 POST /v2/SetCommerceSystemSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""controlMode"": ""1"",
+  ""controlWay"": ""1""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC175,工商业储能/系统设置,工商业"
+Dyness API,Dyness Open API/工商业储能/系统设置,TC176 工商业系统设置-controlWay=2,已获取访问凭证,"1. 调用 POST /v2/SetCommerceSystemSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""controlMode"": ""1"",
+  ""controlWay"": ""2""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC176,工商业储能/系统设置,工商业"
+Dyness API,Dyness Open API/工商业储能/运行模式,TC177 工商业运行模式-operateMode=0,已获取访问凭证,"1. 调用 POST /v2/SetCommerceRunModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""operateMode"": ""0""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC177,工商业储能/运行模式,工商业"
+Dyness API,Dyness Open API/工商业储能/运行模式,TC178 工商业运行模式-operateMode=1,已获取访问凭证,"1. 调用 POST /v2/SetCommerceRunModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""operateMode"": ""1""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC178,工商业储能/运行模式,工商业"
+Dyness API,Dyness Open API/工商业储能/运行模式,TC179 工商业运行模式-operateMode=2,已获取访问凭证,"1. 调用 POST /v2/SetCommerceRunModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""operateMode"": ""2""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC179,工商业储能/运行模式,工商业"
+Dyness API,Dyness Open API/工商业储能/运行模式,TC180 工商业运行模式-operateMode=3,已获取访问凭证,"1. 调用 POST /v2/SetCommerceRunModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""operateMode"": ""3""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC180,工商业储能/运行模式,工商业"
+Dyness API,Dyness Open API/工商业储能/运行模式,TC181 工商业运行模式-operateMode=4,已获取访问凭证,"1. 调用 POST /v2/SetCommerceRunModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""operateMode"": ""4""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC181,工商业储能/运行模式,工商业"
+Dyness API,Dyness Open API/工商业储能/运行模式,TC182 工商业运行模式-operateMode=5,已获取访问凭证,"1. 调用 POST /v2/SetCommerceRunModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""operateMode"": ""5""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC182,工商业储能/运行模式,工商业"
+Dyness API,Dyness Open API/工商业储能/运行模式,TC183 工商业运行模式-threePartyVppOperateMode=0,已获取访问凭证,"1. 调用 POST /v2/SetCommerceRunModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""operateMode"": ""0"",
+  ""threePartyVppOperateMode"": ""0""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC183,工商业储能/运行模式,工商业"
+Dyness API,Dyness Open API/工商业储能/运行模式,TC184 工商业运行模式-threePartyVppOperateMode=1,已获取访问凭证,"1. 调用 POST /v2/SetCommerceRunModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""operateMode"": ""0"",
+  ""threePartyVppOperateMode"": ""1""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC184,工商业储能/运行模式,工商业"
+Dyness API,Dyness Open API/工商业储能/运行模式,TC185 工商业运行模式-threePartyVppOperateMode=2,已获取访问凭证,"1. 调用 POST /v2/SetCommerceRunModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""operateMode"": ""0"",
+  ""threePartyVppOperateMode"": ""2""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC185,工商业储能/运行模式,工商业"
+Dyness API,Dyness Open API/工商业储能/运行模式,TC186 工商业运行模式-threePartyVppOperateMode=3,已获取访问凭证,"1. 调用 POST /v2/SetCommerceRunModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""operateMode"": ""0"",
+  ""threePartyVppOperateMode"": ""3""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC186,工商业储能/运行模式,工商业"
+Dyness API,Dyness Open API/工商业储能/峰谷时段,TC187 工商业峰谷时段-timeType=-1,已获取访问凭证,"1. 调用 POST /v2/SetCommercePeakValleyPeriodSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""electricityPriceTimeRanges"": [
+    {
+      ""startTime"": ""08:00"",
+      ""price"": ""0.2"",
+      ""priceGroup"": ""1"",
+      ""timeType"": -1
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC187,工商业储能/峰谷时段,工商业"
+Dyness API,Dyness Open API/工商业储能/峰谷时段,TC188 工商业峰谷时段-timeType=0,已获取访问凭证,"1. 调用 POST /v2/SetCommercePeakValleyPeriodSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""electricityPriceTimeRanges"": [
+    {
+      ""startTime"": ""08:00"",
+      ""price"": ""0.2"",
+      ""priceGroup"": ""1"",
+      ""timeType"": 0
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC188,工商业储能/峰谷时段,工商业"
+Dyness API,Dyness Open API/工商业储能/峰谷时段,TC189 工商业峰谷时段-timeType=1,已获取访问凭证,"1. 调用 POST /v2/SetCommercePeakValleyPeriodSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""electricityPriceTimeRanges"": [
+    {
+      ""startTime"": ""08:00"",
+      ""price"": ""0.2"",
+      ""priceGroup"": ""1"",
+      ""timeType"": 1
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC189,工商业储能/峰谷时段,工商业"
+Dyness API,Dyness Open API/工商业储能/峰谷时段,TC190 工商业峰谷时段-timeType=2,已获取访问凭证,"1. 调用 POST /v2/SetCommercePeakValleyPeriodSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""electricityPriceTimeRanges"": [
+    {
+      ""startTime"": ""08:00"",
+      ""price"": ""0.2"",
+      ""priceGroup"": ""1"",
+      ""timeType"": 2
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC190,工商业储能/峰谷时段,工商业"
+Dyness API,Dyness Open API/工商业储能/峰谷时段,TC191 工商业峰谷时段-timeType=3,已获取访问凭证,"1. 调用 POST /v2/SetCommercePeakValleyPeriodSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""electricityPriceTimeRanges"": [
+    {
+      ""startTime"": ""08:00"",
+      ""price"": ""0.2"",
+      ""priceGroup"": ""1"",
+      ""timeType"": 3
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC191,工商业储能/峰谷时段,工商业"
+Dyness API,Dyness Open API/工商业储能/系统设置,TC192 工商业系统设置-缺controlMode,已获取访问凭证,"1. 调用 POST /v2/SetCommerceSystemSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""controlWay"": ""2""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC192,工商业储能/系统设置,工商业"
+Dyness API,Dyness Open API/工商业储能/系统设置,TC193 工商业系统设置-缺controlWay,已获取访问凭证,"1. 调用 POST /v2/SetCommerceSystemSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""controlMode"": ""1""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC193,工商业储能/系统设置,工商业"
+Dyness API,Dyness Open API/工商业储能/系统设置,TC194 工商业系统设置-缺operateMode,已获取访问凭证,"1. 调用 POST /v2/SetCommerceSystemSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""controlMode"": ""1"",
+  ""controlWay"": ""2""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC194,工商业储能/系统设置,工商业"
+Dyness API,Dyness Open API/工商业储能/电池参数,TC195 工商业电池参数-缺socProtectEnable,已获取访问凭证,"1. 调用 POST /v2/SetCommerceBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""maxChargeEndSoc"": ""95""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC195,工商业储能/电池参数,工商业"
+Dyness API,Dyness Open API/工商业储能/电池参数,TC196 工商业电池参数-缺maxChargeEndSoc,已获取访问凭证,"1. 调用 POST /v2/SetCommerceBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}"",
+  ""socProtectEnable"": ""1""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC196,工商业储能/电池参数,工商业"
+Dyness API,Dyness Open API/工商业储能/运行模式,TC197 工商业运行模式-缺operateMode,已获取访问凭证,"1. 调用 POST /v2/SetCommerceRunModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC197,工商业储能/运行模式,工商业"
+Dyness API,Dyness Open API/工商业储能/峰谷时段,TC198 工商业峰谷时段-缺electricityPriceTimeRanges,已获取访问凭证,"1. 调用 POST /v2/SetCommercePeakValleyPeriodSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC198,工商业储能/峰谷时段,工商业"
+Dyness API,Dyness Open API/工商业储能/高级设置,TC199 工商业高级设置-缺reset或faultReset,已获取访问凭证,"1. 调用 POST /v2/SetCommerceAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""collectorSn"": ""{{collectorSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC199,工商业储能/高级设置,工商业"
+Dyness API,Dyness Open API/工商业储能/系统设置,TC201 工商业系统设置-deviceSn含特殊字符,已获取访问凭证,"1. 调用 POST /v2/SetCommerceSystemSetting
+2. 请求体：{
+  ""deviceSn"": ""<script>alert(1)</script>"",
+  ""collectorSn"": ""{{collectorSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC201,工商业储能/系统设置,工商业"
+Dyness API,Dyness Open API/工商业储能/系统设置,TC202 工商业系统设置-deviceSn超长,已获取访问凭证,"1. 调用 POST /v2/SetCommerceSystemSetting
+2. 请求体：{
+  ""deviceSn"": ""XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"",
+  ""collectorSn"": ""{{collectorSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC202,工商业储能/系统设置,工商业"
+Dyness API,Dyness Open API/工商业储能/系统设置,TC203 工商业系统设置-deviceSn含换行符,已获取访问凭证,"1. 调用 POST /v2/SetCommerceSystemSetting
+2. 请求体：{
+  ""deviceSn"": ""SN\n001"",
+  ""collectorSn"": ""{{collectorSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC203,工商业储能/系统设置,工商业"
+Dyness API,Dyness Open API/工商业储能/系统设置,TC204 工商业系统设置-deviceSn为布尔值,已获取访问凭证,"1. 调用 POST /v2/SetCommerceSystemSetting
+2. 请求体：{
+  ""deviceSn"": true,
+  ""collectorSn"": ""{{collectorSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC204,工商业储能/系统设置,工商业"
+Dyness API,Dyness Open API/电站中心/电站管理,TC001 Cygni-设备列表查询,已获取访问凭证,"1. 调用 POST /v2/GetDeviceList
+2. 请求体：{
+  ""pageNum"": 1,
+  ""pageSize"": 200
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC001,电站中心/电站管理,Cygni"
+Dyness API,Dyness Open API/电站中心/设备管理,TC002 Cygni-设备信息查询,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC002,电站中心/设备管理,Cygni"
+Dyness API,Dyness Open API/电站中心/设备管理,TC003 Cygni-设备状态查询,已获取访问凭证,"1. 调用 POST /v2/GetStatusInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC003,电站中心/设备管理,Cygni"
+Dyness API,Dyness Open API/电站中心/数据查询,TC004 Cygni-实时运行数据,已获取访问凭证,"1. 调用 POST /v2/GetRealTimeDataBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC004,电站中心/数据查询,Cygni"
+Dyness API,Dyness Open API/电站中心/数据查询,TC005 Cygni-累计电量,已获取访问凭证,"1. 调用 POST /v2/GetTotalEnergyDataBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC005,电站中心/数据查询,Cygni"
+Dyness API,Dyness Open API/电站中心/告警管理,TC006 Cygni-故障信息查询,已获取访问凭证,"1. 调用 POST /v2/GetAlarmInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""pageNum"": 1,
+  ""pageSize"": 200
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC006,电站中心/告警管理,Cygni"
+Dyness API,Dyness Open API/电站中心/设备管理,TC007 Cygni-并机信息查询,已获取访问凭证,"1. 调用 POST /v2/GetParallelInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC007,电站中心/设备管理,Cygni"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC008 Cygni-安规国家查询,已获取访问凭证,"1. 调用 POST /v2/GetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC008,设备参数配置/安规国家设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC009 Cygni-工作模式查询,已获取访问凭证,"1. 调用 POST /v2/GetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC009,设备参数配置/工作模式设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC010 Cygni-电池参数查询,已获取访问凭证,"1. 调用 POST /v2/GetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC010,设备参数配置/电池参数设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/负载控制设置,TC011 Cygni-负载控制查询,已获取访问凭证,"1. 调用 POST /v2/GetLoadControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC011,设备参数配置/负载控制设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/峰值控制设置,TC012 Cygni-峰值控制查询,已获取访问凭证,"1. 调用 POST /v2/GetPeakControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC012,设备参数配置/峰值控制设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC013 Cygni-高级参数查询,已获取访问凭证,"1. 调用 POST /v2/GetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC013,设备参数配置/高级参数设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/发电机控制,TC014 Cygni-发电机控制查询,已获取访问凭证,"1. 调用 POST /v2/GetGeneratorControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC014,设备参数配置/发电机控制,Cygni"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC015 Cygni-安规国家下发,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""safetyCountry"": ""43""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC015,设备参数配置/安规国家设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC016 Cygni-工作模式下发,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workMode"": ""3"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""startTime"": ""07:00"",
+      ""endTime"": ""17:00"",
+      ""power"": ""2000"",
+      ""mode"": ""1"",
+      ""week"": ""0,1,2,3,4"",
+      ""dodState"": ""1"",
+      ""dod"": ""30"",
+      ""socMaxChargeState"": ""1"",
+      ""batterySocMaxCharge"": ""90""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC016,设备参数配置/工作模式设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC017 Cygni-电池参数下发,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""onGridDischargeDod"": ""20"",
+  ""offGridDischargeDod"": ""20"",
+  ""batteryChargeLimit"": ""70"",
+  ""batteryOffGridChargeLimit"": ""70""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC017,设备参数配置/电池参数设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/负载控制设置,TC018 Cygni-负载控制下发,已获取访问凭证,"1. 调用 POST /v2/SetLoadControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""loadSwitch"": ""0"",
+  ""forceCloseTime"": ""07:00-17:00"",
+  ""relayCloseSoc"": ""70"",
+  ""relayOpenSoc"": ""30"",
+  ""forceCloseOffGridOnly"": ""0"",
+  ""alwaysCloseOnGridMode"": ""0"",
+  ""pvPowerThreshold"": ""100""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC018,设备参数配置/负载控制设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/峰值控制设置,TC019 Cygni-峰值控制下发,已获取访问凭证,"1. 调用 POST /v2/SetPeakControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""peakControlEnable"": ""0"",
+  ""triggerSoc"": ""20"",
+  ""timeRange"": ""17:00-22:00"",
+  ""peakControlPower"": ""2000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC019,设备参数配置/峰值控制设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC020 Cygni-高级参数下发,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""powerLevelSetting"": ""1000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC020,设备参数配置/高级参数设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/发电机控制,TC021 Cygni-发电机控制下发,已获取访问凭证,"1. 调用 POST /v2/SetGeneratorControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""generatorWorkMode"": ""1"",
+  ""timingModeSwitch"": ""1"",
+  ""timingModeTimeRange"": ""08:00-12:00"",
+  ""autoModeStartSoc"": ""30"",
+  ""autoModeStopSoc"": ""80"",
+  ""chargeSettingSwitch"": ""1"",
+  ""batteryStartChargeSoc"": ""25"",
+  ""batteryStopChargeSoc"": ""90"",
+  ""chargePower"": ""2000"",
+  ""generatorRatedPower"": ""5000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC021,设备参数配置/发电机控制,Cygni"
+Dyness API,Dyness Open API/电站中心/设备管理,TC101 Cygni-设备信息-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC101,电站中心/设备管理,Cygni"
+Dyness API,Dyness Open API/电站中心/设备管理,TC102 Cygni-设备信息-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC102,电站中心/设备管理,Cygni"
+Dyness API,Dyness Open API/电站中心/数据查询,TC103 Cygni-实时数据-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetRealTimeDataBySN
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC103,电站中心/数据查询,Cygni"
+Dyness API,Dyness Open API/电站中心/数据查询,TC104 Cygni-实时数据-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/GetRealTimeDataBySN
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC104,电站中心/数据查询,Cygni"
+Dyness API,Dyness Open API/电站中心/设备管理,TC105 Cygni-状态信息-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetStatusInfBySN
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC105,电站中心/设备管理,Cygni"
+Dyness API,Dyness Open API/电站中心/告警管理,TC106 Cygni-故障信息-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetAlarmInfBySN
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC106,电站中心/告警管理,Cygni"
+Dyness API,Dyness Open API/电站中心/设备管理,TC107 Cygni-并机信息-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetParallelInfBySN
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC107,电站中心/设备管理,Cygni"
+Dyness API,Dyness Open API/电站中心/设备管理,TC108 Cygni-并机信息-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/GetParallelInfBySN
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC108,电站中心/设备管理,Cygni"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC109 Cygni-安规国家查询-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC109,设备参数配置/安规国家设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC110 Cygni-电池参数查询-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC110,设备参数配置/电池参数设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/发电机控制,TC111 Cygni-发电机控制查询-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetGeneratorControlSetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC111,设备参数配置/发电机控制,Cygni"
+Dyness API,Dyness Open API/设备参数配置/发电机控制,TC112 Cygni-发电机控制下发-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/SetGeneratorControlSetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000"",
+  ""generatorWorkMode"": ""1""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC112,设备参数配置/发电机控制,Cygni"
+Dyness API,Dyness Open API/电站中心/电站管理,TC121 Cygni-设备列表-pageSize越界,已获取访问凭证,"1. 调用 POST /v2/GetDeviceList
+2. 请求体：{
+  ""pageNum"": 1,
+  ""pageSize"": 201
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC121,电站中心/电站管理,Cygni"
+Dyness API,Dyness Open API/电站中心/电站管理,TC122 Cygni-设备列表-pageSize为0,已获取访问凭证,"1. 调用 POST /v2/GetDeviceList
+2. 请求体：{
+  ""pageNum"": 1,
+  ""pageSize"": 0
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC122,电站中心/电站管理,Cygni"
+Dyness API,Dyness Open API/电站中心/告警管理,TC123 Cygni-故障信息-pageSize越界,已获取访问凭证,"1. 调用 POST /v2/GetAlarmInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""pageNum"": 1,
+  ""pageSize"": 201
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC123,电站中心/告警管理,Cygni"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC131 Cygni-电池参数-并网放电深度最小值,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""onGridDischargeDod"": ""5"",
+  ""offGridDischargeDod"": ""20"",
+  ""batteryChargeLimit"": ""70"",
+  ""batteryOffGridChargeLimit"": ""70""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC131,设备参数配置/电池参数设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC132 Cygni-电池参数-并网放电深度最大值,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""onGridDischargeDod"": ""100"",
+  ""offGridDischargeDod"": ""20"",
+  ""batteryChargeLimit"": ""70"",
+  ""batteryOffGridChargeLimit"": ""70""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC132,设备参数配置/电池参数设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC133 Cygni-电池参数-并网放电深度越界,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""onGridDischargeDod"": ""101"",
+  ""offGridDischargeDod"": ""20"",
+  ""batteryChargeLimit"": ""70"",
+  ""batteryOffGridChargeLimit"": ""70""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC133,设备参数配置/电池参数设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC134 Cygni-电池参数-充电限值越界,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""onGridDischargeDod"": ""20"",
+  ""offGridDischargeDod"": ""20"",
+  ""batteryChargeLimit"": ""101"",
+  ""batteryOffGridChargeLimit"": ""70""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC134,设备参数配置/电池参数设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/峰值控制设置,TC135 Cygni-峰值控制-triggerSoc越界,已获取访问凭证,"1. 调用 POST /v2/SetPeakControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""peakControlEnable"": ""0"",
+  ""triggerSoc"": ""101"",
+  ""timeRange"": ""17:00-22:00"",
+  ""peakControlPower"": ""2000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC135,设备参数配置/峰值控制设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/峰值控制设置,TC136 Cygni-峰值控制-peakControlPower越界,已获取访问凭证,"1. 调用 POST /v2/SetPeakControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""peakControlEnable"": ""0"",
+  ""triggerSoc"": ""20"",
+  ""timeRange"": ""17:00-22:00"",
+  ""peakControlPower"": ""65536""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC136,设备参数配置/峰值控制设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/峰值控制设置,TC137 Cygni-峰值控制-peakControlEnable非法,已获取访问凭证,"1. 调用 POST /v2/SetPeakControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""peakControlEnable"": ""2"",
+  ""triggerSoc"": ""20"",
+  ""timeRange"": ""17:00-22:00"",
+  ""peakControlPower"": ""2000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC137,设备参数配置/峰值控制设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC138 Cygni-工作模式-workMode非法,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workMode"": ""99"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""startTime"": ""07:00"",
+      ""endTime"": ""17:00"",
+      ""power"": ""2000"",
+      ""mode"": ""1"",
+      ""week"": ""0,1,2,3,4"",
+      ""dodState"": ""1"",
+      ""dod"": ""30"",
+      ""socMaxChargeState"": ""1"",
+      ""batterySocMaxCharge"": ""90""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC138,设备参数配置/工作模式设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC139 Cygni-工作模式-缺workGroups,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workMode"": ""3""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC139,设备参数配置/工作模式设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/负载控制设置,TC140 Cygni-负载控制-loadSwitch非法,已获取访问凭证,"1. 调用 POST /v2/SetLoadControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""loadSwitch"": ""2""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC140,设备参数配置/负载控制设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC141 Cygni-高级参数-powerLevelSetting越界,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""powerLevelSetting"": ""65536""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC141,设备参数配置/高级参数设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC142 Cygni-高级参数-isoSetting越界,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""isoSetting"": ""9""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC142,设备参数配置/高级参数设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC143 Cygni-安规国家-safetyCountry越界,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""safetyCountry"": ""999""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC143,设备参数配置/安规国家设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC144 Cygni-安规国家-缺safetyCountry,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC144,设备参数配置/安规国家设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/发电机控制,TC145 Cygni-发电机-工作模式非法,已获取访问凭证,"1. 调用 POST /v2/SetGeneratorControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""generatorWorkMode"": ""9""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC145,设备参数配置/发电机控制,Cygni"
+Dyness API,Dyness Open API/设备参数配置/发电机控制,TC146 Cygni-发电机-启动SOC越界,已获取访问凭证,"1. 调用 POST /v2/SetGeneratorControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""autoModeStartSoc"": ""101""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC146,设备参数配置/发电机控制,Cygni"
+Dyness API,Dyness Open API/设备参数配置/发电机控制,TC147 Cygni-发电机-停止SOC越界,已获取访问凭证,"1. 调用 POST /v2/SetGeneratorControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""autoModeStopSoc"": ""101""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC147,设备参数配置/发电机控制,Cygni"
+Dyness API,Dyness Open API/设备参数配置/发电机控制,TC148 Cygni-发电机-工作模式=定时,已获取访问凭证,"1. 调用 POST /v2/SetGeneratorControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""generatorWorkMode"": ""0"",
+  ""timingModeSwitch"": ""1"",
+  ""timingModeTimeRange"": ""08:00-12:00"",
+  ""autoModeStartSoc"": ""30"",
+  ""autoModeStopSoc"": ""80""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC148,设备参数配置/发电机控制,Cygni"
+Dyness API,Dyness Open API/设备参数配置/发电机控制,TC149 Cygni-发电机-工作模式=自动,已获取访问凭证,"1. 调用 POST /v2/SetGeneratorControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""generatorWorkMode"": ""1"",
+  ""autoModeStartSoc"": ""30"",
+  ""autoModeStopSoc"": ""80"",
+  ""chargeSettingSwitch"": ""1"",
+  ""batteryStartChargeSoc"": ""25"",
+  ""batteryStopChargeSoc"": ""90""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC149,设备参数配置/发电机控制,Cygni"
+Dyness API,Dyness Open API/设备参数配置/发电机控制,TC150 Cygni-发电机-工作模式=手动,已获取访问凭证,"1. 调用 POST /v2/SetGeneratorControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""generatorWorkMode"": ""2""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC150,设备参数配置/发电机控制,Cygni"
+Dyness API,Dyness Open API/设备参数配置/发电机控制,TC151 Cygni-发电机-工作模式=关闭,已获取访问凭证,"1. 调用 POST /v2/SetGeneratorControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""generatorWorkMode"": ""3""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC151,设备参数配置/发电机控制,Cygni"
+Dyness API,Dyness Open API/设备参数配置/发电机控制,TC152 Cygni-发电机-定时开关=关,已获取访问凭证,"1. 调用 POST /v2/SetGeneratorControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""generatorWorkMode"": ""0"",
+  ""timingModeSwitch"": ""0""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC152,设备参数配置/发电机控制,Cygni"
+Dyness API,Dyness Open API/设备参数配置/发电机控制,TC153 Cygni-发电机-定时开关=开,已获取访问凭证,"1. 调用 POST /v2/SetGeneratorControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""generatorWorkMode"": ""0"",
+  ""timingModeSwitch"": ""1"",
+  ""timingModeTimeRange"": ""08:00-12:00""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC153,设备参数配置/发电机控制,Cygni"
+Dyness API,Dyness Open API/设备参数配置/发电机控制,TC154 Cygni-发电机-充电设置开关=关,已获取访问凭证,"1. 调用 POST /v2/SetGeneratorControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""generatorWorkMode"": ""1"",
+  ""autoModeStartSoc"": ""30"",
+  ""autoModeStopSoc"": ""80"",
+  ""chargeSettingSwitch"": ""0""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC154,设备参数配置/发电机控制,Cygni"
+Dyness API,Dyness Open API/设备参数配置/发电机控制,TC155 Cygni-发电机-充电设置开关=开,已获取访问凭证,"1. 调用 POST /v2/SetGeneratorControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""generatorWorkMode"": ""1"",
+  ""autoModeStartSoc"": ""30"",
+  ""autoModeStopSoc"": ""80"",
+  ""chargeSettingSwitch"": ""1"",
+  ""batteryStartChargeSoc"": ""25"",
+  ""batteryStopChargeSoc"": ""90""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC155,设备参数配置/发电机控制,Cygni"
+Dyness API,Dyness Open API/设备参数配置/发电机控制,TC156 Cygni-发电机控制下发-缺generatorWorkMode,已获取访问凭证,"1. 调用 POST /v2/SetGeneratorControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC156,设备参数配置/发电机控制,Cygni"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC157 Cygni-电池参数下发-缺onGridDischargeDod,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""offGridDischargeDod"": ""20"",
+  ""batteryChargeLimit"": ""70""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC157,设备参数配置/电池参数设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/峰值控制设置,TC158 Cygni-峰值控制下发-缺peakControlEnable,已获取访问凭证,"1. 调用 POST /v2/SetPeakControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""triggerSoc"": ""20"",
+  ""timeRange"": ""17:00-22:00"",
+  ""peakControlPower"": ""2000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC158,设备参数配置/峰值控制设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/负载控制设置,TC159 Cygni-负载控制下发-缺loadSwitch,已获取访问凭证,"1. 调用 POST /v2/SetLoadControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""forceCloseTime"": ""07:00-17:00"",
+  ""relayCloseSoc"": ""70""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC159,设备参数配置/负载控制设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC160 Cygni-高级参数下发-缺powerLevelSetting,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC160,设备参数配置/高级参数设置,Cygni"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC161 Cygni-工作模式下发-缺workMode,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""startTime"": ""07:00"",
+      ""endTime"": ""17:00"",
+      ""power"": ""2000"",
+      ""mode"": ""1"",
+      ""week"": ""0,1,2,3,4"",
+      ""dodState"": ""1"",
+      ""dod"": ""30"",
+      ""socMaxChargeState"": ""1"",
+      ""batterySocMaxCharge"": ""90""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC161,设备参数配置/工作模式设置,Cygni"
+Dyness API,Dyness Open API/电站中心/设备管理,TC171 Cygni-设备信息-deviceSn含特殊字符,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""@#$%^&*()""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC171,电站中心/设备管理,Cygni"
+Dyness API,Dyness Open API/电站中心/设备管理,TC172 Cygni-设备信息-deviceSn超长字符串,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC172,电站中心/设备管理,Cygni"
+Dyness API,Dyness Open API/电站中心/设备管理,TC173 Cygni-设备信息-deviceSn含空格,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""SN 001 TEST""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC173,电站中心/设备管理,Cygni"
+Dyness API,Dyness Open API/电站中心/设备管理,TC174 Cygni-设备信息-deviceSn纯数字,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""12345678901234567890""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC174,电站中心/设备管理,Cygni"
+Dyness API,Dyness Open API/电站中心/设备管理,TC175 Cygni-设备信息-deviceSn为null字符串,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""null""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC175,电站中心/设备管理,Cygni"
+Dyness API,Dyness Open API/电站中心/设备管理,TC001 高压电池-设备信息查询,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC001,电站中心/设备管理,高压电池"
+Dyness API,Dyness Open API/电站中心/数据查询,TC002 高压电池-实时运行数据,已获取访问凭证,"1. 调用 POST /v2/GetRealTimeDataBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC002,电站中心/数据查询,高压电池"
+Dyness API,Dyness Open API/电站中心/告警管理,TC003 高压电池-故障信息查询,已获取访问凭证,"1. 调用 POST /v2/GetAlarmInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""pageNum"": 1,
+  ""pageSize"": 200
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC003,电站中心/告警管理,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC004 高压电池-电池加热查询,已获取访问凭证,"1. 调用 POST /v2/GetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC004,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC005 高压电池-电池加热下发,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC005,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/电站中心/设备管理,TC101 高压电池-设备信息-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC101,电站中心/设备管理,高压电池"
+Dyness API,Dyness Open API/电站中心/设备管理,TC102 高压电池-设备信息-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC102,电站中心/设备管理,高压电池"
+Dyness API,Dyness Open API/电站中心/设备管理,TC103 高压电池-设备信息-缺deviceSn,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：(空)","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC103,电站中心/设备管理,高压电池"
+Dyness API,Dyness Open API/电站中心/数据查询,TC104 高压电池-实时数据-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetRealTimeDataBySN
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC104,电站中心/数据查询,高压电池"
+Dyness API,Dyness Open API/电站中心/数据查询,TC105 高压电池-实时数据-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/GetRealTimeDataBySN
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC105,电站中心/数据查询,高压电池"
+Dyness API,Dyness Open API/电站中心/告警管理,TC106 高压电池-故障信息-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetAlarmInfBySN
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC106,电站中心/告警管理,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC107 高压电池-电池加热查询-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC107,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC108 高压电池-电池加热查询-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/GetBatterySetting
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC108,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC109 高压电池-电池加热下发-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC109,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC110 高压电池-电池加热下发-缺deviceSn,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC110,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/电站中心/告警管理,TC121 高压电池-故障信息-pageSize越界,已获取访问凭证,"1. 调用 POST /v2/GetAlarmInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""pageNum"": 1,
+  ""pageSize"": 201
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC121,电站中心/告警管理,高压电池"
+Dyness API,Dyness Open API/电站中心/告警管理,TC122 高压电池-故障信息-pageSize为0,已获取访问凭证,"1. 调用 POST /v2/GetAlarmInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""pageNum"": 1,
+  ""pageSize"": 0
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC122,电站中心/告警管理,高压电池"
+Dyness API,Dyness Open API/电站中心/告警管理,TC123 高压电池-故障信息-pageSize非数字,已获取访问凭证,"1. 调用 POST /v2/GetAlarmInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""pageNum"": 1,
+  ""pageSize"": ""abc""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC123,电站中心/告警管理,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC131 高压电池-加热开关=关,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""0"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC131,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC132 高压电池-加热开关=开,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC132,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC133 高压电池-加热开关非法,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""2"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC133,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC134 高压电池-温度下限最小值,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC134,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC135 高压电池-温度下限最大值,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""15"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC135,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC136 高压电池-温度下限越界小,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""9"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC136,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC137 高压电池-温度下限越界大,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""16"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC137,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC138 高压电池-温度上限最小值,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""15"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC138,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC139 高压电池-温度上限最大值,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC139,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC140 高压电池-温度上限越界小,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""14"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC140,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC141 高压电池-温度上限越界大,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""21"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC141,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC142 高压电池-加热温差不足5度,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""12"",
+      ""tempMax"": ""16"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500",2,接口测试,功能测试,"TC142,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC143 高压电池-开始时间格式错误,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""abc"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC143,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC144 高压电池-加热时段超过4组,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    [
+      {
+        ""status"": ""1"",
+        ""startTime"": ""08:30"",
+        ""endTime"": ""10:30"",
+        ""tempMin"": ""10"",
+        ""tempMax"": ""20"",
+        ""weekInfo"": ""0,1,2,3,4""
+      }
+    ],
+    [
+      {
+        ""status"": ""1"",
+        ""startTime"": ""08:30"",
+        ""endTime"": ""10:30"",
+        ""tempMin"": ""10"",
+        ""tempMax"": ""20"",
+        ""weekInfo"": ""0,1,2,3,4""
+      }
+    ],
+    [
+      {
+        ""status"": ""1"",
+        ""startTime"": ""08:30"",
+        ""endTime"": ""10:30"",
+        ""tempMin"": ""10"",
+        ""tempMax"": ""20"",
+        ""weekInfo"": ""0,1,2,3,4""
+      }
+    ],
+    [
+      {
+        ""status"": ""1"",
+        ""startTime"": ""08:30"",
+        ""endTime"": ""10:30"",
+        ""tempMin"": ""10"",
+        ""tempMax"": ""20"",
+        ""weekInfo"": ""0,1,2,3,4""
+      }
+    ],
+    [
+      {
+        ""status"": ""1"",
+        ""startTime"": ""08:30"",
+        ""endTime"": ""10:30"",
+        ""tempMin"": ""10"",
+        ""tempMax"": ""20"",
+        ""weekInfo"": ""0,1,2,3,4""
+      }
+    ]
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC144,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC151 高压电池-加热-weekInfo=工作日,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC151,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC152 高压电池-加热-weekInfo=周末,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""5,6""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC152,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC153 高压电池-加热-weekInfo=全部,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4,5,6""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC153,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC154 高压电池-加热-weekInfo=单天,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC154,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC155 高压电池-加热-weekInfo=空,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": """"
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC155,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC161 高压电池-加热下发-缺heatingPeriodList,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC161,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC162 高压电池-加热下发-时段缺status,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC162,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC163 高压电池-加热下发-时段缺startTime,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC163,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC164 高压电池-加热下发-时段缺endTime,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC164,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC165 高压电池-加热下发-时段缺tempMin,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC165,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC166 高压电池-加热下发-时段缺tempMax,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC166,设备参数配置/电池参数设置,高压电池"
+Dyness API,Dyness Open API/电站中心/设备管理,TC181 高压电池-设备信息-deviceSn含特殊字符,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""SN<>?001""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC181,电站中心/设备管理,高压电池"
+Dyness API,Dyness Open API/电站中心/设备管理,TC182 高压电池-设备信息-deviceSn超长,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC182,电站中心/设备管理,高压电池"
+Dyness API,Dyness Open API/电站中心/设备管理,TC183 高压电池-设备信息-deviceSn含Tab,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""SN\t001""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC183,电站中心/设备管理,高压电池"
+Dyness API,Dyness Open API/电站中心/设备管理,TC184 高压电池-设备信息-deviceSn为数字类型,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": 123456789
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC184,电站中心/设备管理,高压电池"
+Dyness API,Dyness Open API/电站中心/设备管理,TC185 高压电池-设备信息-deviceSn为空对象,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": {}
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC185,电站中心/设备管理,高压电池"
+Dyness API,Dyness Open API/电站中心/电站管理,TC001 设备信息查询,已获取访问凭证,"1. 调用 POST /v2/GetDeviceList
+2. 请求体：{
+  ""pageNum"": 1,
+  ""pageSize"": 200
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC001,电站中心/电站管理,户用储能"
+Dyness API,Dyness Open API/电站中心/设备管理,TC002 设备基本信息查询,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC002,电站中心/设备管理,户用储能"
+Dyness API,Dyness Open API/电站中心/设备管理,TC003 设备状态信息查询,已获取访问凭证,"1. 调用 POST /v2/GetStatusInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC003,电站中心/设备管理,户用储能"
+Dyness API,Dyness Open API/电站中心/数据查询,TC004 设备运行数据查询,已获取访问凭证,"1. 调用 POST /v2/GetRealTimeDataBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC004,电站中心/数据查询,户用储能"
+Dyness API,Dyness Open API/电站中心/数据查询,TC005 设备电量信息查询,已获取访问凭证,"1. 调用 POST /v2/GetTotalEnergyDataBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC005,电站中心/数据查询,户用储能"
+Dyness API,Dyness Open API/电站中心/告警管理,TC006 设备故障信息查询,已获取访问凭证,"1. 调用 POST /v2/GetAlarmInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""pageNum"": 1,
+  ""pageSize"": 200
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC006,电站中心/告警管理,户用储能"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC007 安规国家查询,已获取访问凭证,"1. 调用 POST /v2/GetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC007,设备参数配置/安规国家设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC009 工作模式查询,已获取访问凭证,"1. 调用 POST /v2/GetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC009,设备参数配置/工作模式设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC011 电池参数查询,已获取访问凭证,"1. 调用 POST /v2/GetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC011,设备参数配置/电池参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/负载控制设置,TC013 负载控制查询,已获取访问凭证,"1. 调用 POST /v2/GetLoadControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC013,设备参数配置/负载控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/峰值控制设置,TC015 峰值控制查询,已获取访问凭证,"1. 调用 POST /v2/GetPeakControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC015,设备参数配置/峰值控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC017 高级参数查询,已获取访问凭证,"1. 调用 POST /v2/GetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC017,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC008 安规国家下发,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""safetyCountry"": ""43""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC008,设备参数配置/安规国家设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC010 工作模式下发,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workMode"": ""3"",
+  ""[AquaVolt,SolarCube,SolarCube2] workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""startTime"": ""07:00"",
+      ""endTime"": ""17:00"",
+      ""power"": ""2000"",
+      ""mode"": ""1"",
+      ""week"": ""0,1,2,3,4"",
+      ""dodState"": ""1"",
+      ""dod"": ""30"",
+      ""socMaxChargeState"": ""1"",
+      ""batterySocMaxCharge"": ""90""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC010,设备参数配置/工作模式设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC012 电池参数下发,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""[AquaVolt,SolarCube,SolarCube2] onGridDischargeDod"": ""20"",
+  ""offGridDischargeDod"": ""20"",
+  ""[AquaVolt,SolarCube,SolarCube2] batteryChargeLimit"": ""70"",
+  ""[SolarCube,SolarCube2] batteryOffGridChargeLimit"": ""70""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC012,设备参数配置/电池参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/负载控制设置,TC014 负载控制下发,已获取访问凭证,"1. 调用 POST /v2/SetLoadControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""loadSwitch"": ""0"",
+  ""forceCloseTime"": ""07:00-17:00"",
+  ""relayCloseSoc"": ""70"",
+  ""relayOpenSoc"": ""30"",
+  ""forceCloseOffGridOnly"": ""0"",
+  ""alwaysCloseOnGridMode"": ""0"",
+  ""pvPowerThreshold"": ""100""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC014,设备参数配置/负载控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/峰值控制设置,TC016 峰值控制下发,已获取访问凭证,"1. 调用 POST /v2/SetPeakControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""peakControlEnable"": ""0"",
+  ""triggerSoc"": ""20"",
+  ""timeRange"": ""17:00-22:00"",
+  ""peakControlPower"": ""2000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC016,设备参数配置/峰值控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC018 高级参数下发,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""gridPowerLimitGroup"": {
+    ""gridPowerLimitSwitch"": ""1"",
+    ""gridPowerLimitValue"": ""500""
+  },
+  ""backupPowerSwitch"": ""1"",
+  ""pvConnectMode"": ""0"",
+  ""extCtMeterGroup"": {
+    ""extCtMeterSelect"": ""1"",
+    ""ctApplication"": ""1""
+  },
+  ""isoSetting"": ""500"",
+  ""acCouplingEnable"": ""1"",
+  ""powerLevelSetting"": ""1000"",
+  ""groundDetectionEnable"": ""1""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC018,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/电站中心/设备管理,TC101 设备基本信息查询-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC101,电站中心/设备管理,户用储能"
+Dyness API,Dyness Open API/电站中心/设备管理,TC102 设备基本信息查询-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC102,电站中心/设备管理,户用储能"
+Dyness API,Dyness Open API/电站中心/设备管理,TC103 设备状态信息查询-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetStatusInfBySN
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC103,电站中心/设备管理,户用储能"
+Dyness API,Dyness Open API/电站中心/设备管理,TC104 设备状态信息查询-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/GetStatusInfBySN
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC104,电站中心/设备管理,户用储能"
+Dyness API,Dyness Open API/电站中心/数据查询,TC105 设备运行数据查询-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetRealTimeDataBySN
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC105,电站中心/数据查询,户用储能"
+Dyness API,Dyness Open API/电站中心/数据查询,TC106 设备运行数据查询-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/GetRealTimeDataBySN
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC106,电站中心/数据查询,户用储能"
+Dyness API,Dyness Open API/电站中心/数据查询,TC107 设备电量信息查询-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetTotalEnergyDataBySN
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC107,电站中心/数据查询,户用储能"
+Dyness API,Dyness Open API/电站中心/数据查询,TC108 设备电量信息查询-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/GetTotalEnergyDataBySN
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC108,电站中心/数据查询,户用储能"
+Dyness API,Dyness Open API/电站中心/告警管理,TC109 设备故障信息查询-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetAlarmInfBySN
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC109,电站中心/告警管理,户用储能"
+Dyness API,Dyness Open API/电站中心/告警管理,TC110 设备故障信息查询-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/GetAlarmInfBySN
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC110,电站中心/告警管理,户用储能"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC111 安规国家查询-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC111,设备参数配置/安规国家设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC112 安规国家查询-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/GetBaseSetting
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC112,设备参数配置/安规国家设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC113 工作模式查询-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC113,设备参数配置/工作模式设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC114 工作模式查询-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/GetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC114,设备参数配置/工作模式设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC115 电池参数查询-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC115,设备参数配置/电池参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC116 电池参数查询-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/GetBatterySetting
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC116,设备参数配置/电池参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/负载控制设置,TC117 负载控制查询-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetLoadControlSetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC117,设备参数配置/负载控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/负载控制设置,TC118 负载控制查询-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/GetLoadControlSetting
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC118,设备参数配置/负载控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/峰值控制设置,TC119 峰值控制查询-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetPeakControlSetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC119,设备参数配置/峰值控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/峰值控制设置,TC120 峰值控制查询-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/GetPeakControlSetting
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC120,设备参数配置/峰值控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC121 高级参数查询-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC121,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC122 高级参数查询-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/GetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC122,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC123 安规国家下发-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC123,设备参数配置/安规国家设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC124 安规国家下发-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC124,设备参数配置/安规国家设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC125 工作模式下发-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC125,设备参数配置/工作模式设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC126 工作模式下发-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC126,设备参数配置/工作模式设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC127 电池参数下发-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC127,设备参数配置/电池参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC128 电池参数下发-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC128,设备参数配置/电池参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/负载控制设置,TC129 负载控制下发-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/SetLoadControlSetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC129,设备参数配置/负载控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/负载控制设置,TC130 负载控制下发-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/SetLoadControlSetting
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC130,设备参数配置/负载控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/峰值控制设置,TC131 峰值控制下发-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/SetPeakControlSetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC131,设备参数配置/峰值控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/峰值控制设置,TC132 峰值控制下发-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/SetPeakControlSetting
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC132,设备参数配置/峰值控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC133 高级参数下发-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC133,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC134 高级参数下发-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC134,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/电站中心/电站管理,TC135 设备信息查询-pageSize越界,已获取访问凭证,"1. 调用 POST /v2/GetDeviceList
+2. 请求体：{
+  ""pageNum"": 1,
+  ""pageSize"": 201
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC135,电站中心/电站管理,户用储能"
+Dyness API,Dyness Open API/电站中心/电站管理,TC136 设备信息查询-pageSize为0,已获取访问凭证,"1. 调用 POST /v2/GetDeviceList
+2. 请求体：{
+  ""pageNum"": 1,
+  ""pageSize"": 0
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC136,电站中心/电站管理,户用储能"
+Dyness API,Dyness Open API/电站中心/电站管理,TC137 设备信息查询-pageSize非数字,已获取访问凭证,"1. 调用 POST /v2/GetDeviceList
+2. 请求体：{
+  ""pageNum"": 1,
+  ""pageSize"": ""abc""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC137,电站中心/电站管理,户用储能"
+Dyness API,Dyness Open API/电站中心/告警管理,TC138 设备故障信息查询-pageSize越界,已获取访问凭证,"1. 调用 POST /v2/GetAlarmInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""pageNum"": 1,
+  ""pageSize"": 201
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC138,电站中心/告警管理,户用储能"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC139 安规国家下发-safetyCountry越界,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""safetyCountry"": ""999""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC139,设备参数配置/安规国家设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC140 工作模式下发-workMode非法,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workMode"": ""99"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""startTime"": ""07:00"",
+      ""endTime"": ""17:00"",
+      ""power"": ""2000"",
+      ""mode"": ""1"",
+      ""week"": ""0,1,2,3,4"",
+      ""dodState"": ""1"",
+      ""dod"": ""30"",
+      ""socMaxChargeState"": ""1"",
+      ""batterySocMaxCharge"": ""90""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC140,设备参数配置/工作模式设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC141 工作模式下发-workGroups功率越界,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workMode"": ""3"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""startTime"": ""07:00"",
+      ""endTime"": ""17:00"",
+      ""power"": ""2001"",
+      ""mode"": ""1"",
+      ""week"": ""0,1,2,3,4"",
+      ""dodState"": ""1"",
+      ""dod"": ""30"",
+      ""socMaxChargeState"": ""1"",
+      ""batterySocMaxCharge"": ""90""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC141,设备参数配置/工作模式设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC142 电池参数下发-onGridDischargeDod越界,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""onGridDischargeDod"": ""101""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC142,设备参数配置/电池参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC143 电池参数下发-onGridDischargeDod为负,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""onGridDischargeDod"": ""4""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC143,设备参数配置/电池参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC144 电池参数下发-batteryChargeLimit越界,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""batteryChargeLimit"": ""101""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC144,设备参数配置/电池参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/负载控制设置,TC145 负载控制下发-loadSwitch非法,已获取访问凭证,"1. 调用 POST /v2/SetLoadControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""loadSwitch"": ""2""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC145,设备参数配置/负载控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/负载控制设置,TC146 负载控制下发-relayCloseSoc越界,已获取访问凭证,"1. 调用 POST /v2/SetLoadControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""relayCloseSoc"": ""101""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC146,设备参数配置/负载控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/负载控制设置,TC147 负载控制下发-pvPowerThreshold越界,已获取访问凭证,"1. 调用 POST /v2/SetLoadControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""pvPowerThreshold"": ""65536""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC147,设备参数配置/负载控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/峰值控制设置,TC148 峰值控制下发-triggerSoc越界,已获取访问凭证,"1. 调用 POST /v2/SetPeakControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""triggerSoc"": ""101""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC148,设备参数配置/峰值控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/峰值控制设置,TC149 峰值控制下发-peakControlEnable非法,已获取访问凭证,"1. 调用 POST /v2/SetPeakControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""peakControlEnable"": ""2""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC149,设备参数配置/峰值控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC150 高级参数下发-powerLevelSetting越界,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""powerLevelSetting"": ""2001""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC150,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC151 高级参数下发-isoSetting越界,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""isoSetting"": ""9""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC151,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC152 高级参数下发-gridPowerLimitValue越界,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""gridPowerLimitGroup"": {
+    ""gridPowerLimitValue"": ""801""
+  }
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC152,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC153 安规国家下发-缺safetyCountry,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC153,设备参数配置/安规国家设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC154 工作模式下发-缺workGroups,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workMode"": ""3""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC154,设备参数配置/工作模式设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC155 工作模式下发-缺workMode,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""startTime"": ""07:00"",
+      ""endTime"": ""17:00"",
+      ""power"": ""2000"",
+      ""mode"": ""1"",
+      ""week"": ""0,1,2,3,4"",
+      ""dodState"": ""1"",
+      ""dod"": ""30"",
+      ""socMaxChargeState"": ""1"",
+      ""batterySocMaxCharge"": ""90""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC155,设备参数配置/工作模式设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC156 电池参数下发-onGridDischargeDod最小值,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""onGridDischargeDod"": ""5""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC156,设备参数配置/电池参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC157 电池参数下发-onGridDischargeDod最大值,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""onGridDischargeDod"": ""100""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC157,设备参数配置/电池参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC158 电池参数下发-batteryChargeLimit最小值,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""batteryChargeLimit"": ""10""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC158,设备参数配置/电池参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/峰值控制设置,TC159 峰值控制下发-triggerSoc最大值,已获取访问凭证,"1. 调用 POST /v2/SetPeakControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""triggerSoc"": ""100""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC159,设备参数配置/峰值控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC160 安规国家下发-safetyCountry=0,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""safetyCountry"": ""0""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC160,设备参数配置/安规国家设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC161 安规国家下发-safetyCountry=2,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""safetyCountry"": ""2""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC161,设备参数配置/安规国家设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC162 安规国家下发-safetyCountry=37,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""safetyCountry"": ""37""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC162,设备参数配置/安规国家设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC163 安规国家下发-safetyCountry=46,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""safetyCountry"": ""46""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC163,设备参数配置/安规国家设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC164 安规国家下发-safetyCountry=106,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""safetyCountry"": ""106""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC164,设备参数配置/安规国家设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC165 工作模式下发-workMode=0,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workMode"": ""0"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""startTime"": ""07:00"",
+      ""endTime"": ""17:00"",
+      ""power"": ""2000"",
+      ""mode"": ""1"",
+      ""week"": ""0,1,2,3,4"",
+      ""dodState"": ""1"",
+      ""dod"": ""30"",
+      ""socMaxChargeState"": ""1"",
+      ""batterySocMaxCharge"": ""90""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC165,设备参数配置/工作模式设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC166 工作模式下发-workMode=1,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workMode"": ""1"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""startTime"": ""07:00"",
+      ""endTime"": ""17:00"",
+      ""power"": ""2000"",
+      ""mode"": ""1"",
+      ""week"": ""0,1,2,3,4"",
+      ""dodState"": ""1"",
+      ""dod"": ""30"",
+      ""socMaxChargeState"": ""1"",
+      ""batterySocMaxCharge"": ""90""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC166,设备参数配置/工作模式设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC167 工作模式下发-workMode=2,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workMode"": ""2"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""startTime"": ""07:00"",
+      ""endTime"": ""17:00"",
+      ""power"": ""2000"",
+      ""mode"": ""1"",
+      ""week"": ""0,1,2,3,4"",
+      ""dodState"": ""1"",
+      ""dod"": ""30"",
+      ""socMaxChargeState"": ""1"",
+      ""batterySocMaxCharge"": ""90""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC167,设备参数配置/工作模式设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC168 工作模式下发-workMode=6,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workMode"": ""6"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""startTime"": ""07:00"",
+      ""endTime"": ""17:00"",
+      ""power"": ""2000"",
+      ""mode"": ""1"",
+      ""week"": ""0,1,2,3,4"",
+      ""dodState"": ""1"",
+      ""dod"": ""30"",
+      ""socMaxChargeState"": ""1"",
+      ""batterySocMaxCharge"": ""90""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC168,设备参数配置/工作模式设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC169 高级参数下发-extCtMeterSelect=0,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""extCtMeterGroup"": {
+    ""extCtMeterSelect"": ""0""
+  }
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC169,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC170 高级参数下发-extCtMeterSelect=2,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""extCtMeterGroup"": {
+    ""extCtMeterSelect"": ""2"",
+    ""meterApplication"": ""0""
+  }
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC170,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC171 电池参数下发-offGridDischargeDod越界,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""offGridDischargeDod"": ""101""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC171,设备参数配置/电池参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC172 电池参数下发-offGridDischargeDod越界小,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""offGridDischargeDod"": ""4""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC172,设备参数配置/电池参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC173 电池参数下发-offGridDischargeDod最小值,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""offGridDischargeDod"": ""5""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC173,设备参数配置/电池参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC174 电池参数下发-offGridDischargeDod最大值,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""offGridDischargeDod"": ""100""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC174,设备参数配置/电池参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC175 电池参数下发-batteryOffGridChargeLimit越界,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""batteryOffGridChargeLimit"": ""101""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC175,设备参数配置/电池参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/负载控制设置,TC176 负载控制下发-forceCloseTime格式错误,已获取访问凭证,"1. 调用 POST /v2/SetLoadControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""forceCloseTime"": ""abc""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC176,设备参数配置/负载控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/负载控制设置,TC177 负载控制下发-relayOpenSoc越界,已获取访问凭证,"1. 调用 POST /v2/SetLoadControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""relayOpenSoc"": ""101""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC177,设备参数配置/负载控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/负载控制设置,TC178 负载控制下发-forceCloseOffGridOnly非法,已获取访问凭证,"1. 调用 POST /v2/SetLoadControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""forceCloseOffGridOnly"": ""2""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC178,设备参数配置/负载控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/负载控制设置,TC179 负载控制下发-alwaysCloseOnGridMode非法,已获取访问凭证,"1. 调用 POST /v2/SetLoadControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""alwaysCloseOnGridMode"": ""2""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC179,设备参数配置/负载控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/峰值控制设置,TC180 峰值控制下发-timeRange格式错误,已获取访问凭证,"1. 调用 POST /v2/SetPeakControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""timeRange"": ""abc""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC180,设备参数配置/峰值控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/峰值控制设置,TC181 峰值控制下发-peakControlPower越界,已获取访问凭证,"1. 调用 POST /v2/SetPeakControlSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""peakControlPower"": ""65536""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC181,设备参数配置/峰值控制设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC182 高级参数下发-backupPowerSwitch非法,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""backupPowerSwitch"": ""2""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC182,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC183 高级参数下发-pvConnectMode非法,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""pvConnectMode"": ""2""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC183,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC184 高级参数下发-extCtMeterSelect非法,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""extCtMeterGroup"": {
+    ""extCtMeterSelect"": ""3""
+  }
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC184,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC185 高级参数下发-acCouplingEnable非法,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""acCouplingEnable"": ""2""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC185,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC186 高级参数下发-groundDetectionEnable非法,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""groundDetectionEnable"": ""2""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC186,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC187 高级参数下发-offGridOutputSwitch非法,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""offGridOutputSwitch"": ""2""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC187,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC188 高级参数下发-sleepDetectionLevel非法,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""sleepDetectionLevel"": ""3""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC188,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC189 高级参数下发-powerLevelSetting最小值,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""powerLevelSetting"": ""700""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC189,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC190 高级参数下发-powerLevelSetting最大值,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""powerLevelSetting"": ""2000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC190,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC191 高级参数下发-powerLevelSetting越界小,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""powerLevelSetting"": ""699""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC191,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC192 高级参数下发-powerLevelSetting非挡位,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""powerLevelSetting"": ""705""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC192,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC193 高级参数下发-gridPowerLimitValue最小值,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""gridPowerLimitGroup"": {
+    ""gridPowerLimitValue"": ""0""
+  }
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC193,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/设备参数配置/高级参数设置,TC194 高级参数下发-gridPowerLimitValue最大值,已获取访问凭证,"1. 调用 POST /v2/SetAdvancedSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""gridPowerLimitGroup"": {
+    ""gridPowerLimitValue"": ""800""
+  }
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC194,设备参数配置/高级参数设置,户用储能"
+Dyness API,Dyness Open API/电站中心/设备管理,TC001 JuniorBox-设备信息查询,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC001,电站中心/设备管理,JuniorBox"
+Dyness API,Dyness Open API/电站中心/数据查询,TC002 JuniorBox-实时运行数据,已获取访问凭证,"1. 调用 POST /v2/GetRealTimeDataBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC002,电站中心/数据查询,JuniorBox"
+Dyness API,Dyness Open API/电站中心/告警管理,TC003 JuniorBox-故障信息查询,已获取访问凭证,"1. 调用 POST /v2/GetAlarmInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""pageNum"": 1,
+  ""pageSize"": 200
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC003,电站中心/告警管理,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC004 JuniorBox-基础设置查询,已获取访问凭证,"1. 调用 POST /v2/GetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC004,设备参数配置/安规国家设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC005 JuniorBox-基础设置下发,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workMode"": ""3"",
+  ""powerLimit"": ""100"",
+  ""dischargeDepth"": ""20""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC005,设备参数配置/安规国家设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC006 JuniorBox-分时设置查询,已获取访问凭证,"1. 调用 POST /v2/GetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC006,设备参数配置/工作模式设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC007 JuniorBox-分时设置下发,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""mode"": ""0"",
+      ""startTime"": ""08:00"",
+      ""endTime"": ""18:00"",
+      ""power"": ""320"",
+      ""week"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC007,设备参数配置/工作模式设置,JuniorBox"
+Dyness API,Dyness Open API/电站中心/设备管理,TC101 JuniorBox-设备信息-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC101,电站中心/设备管理,JuniorBox"
+Dyness API,Dyness Open API/电站中心/设备管理,TC102 JuniorBox-设备信息-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC102,电站中心/设备管理,JuniorBox"
+Dyness API,Dyness Open API/电站中心/数据查询,TC103 JuniorBox-实时数据-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetRealTimeDataBySN
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC103,电站中心/数据查询,JuniorBox"
+Dyness API,Dyness Open API/电站中心/告警管理,TC104 JuniorBox-故障信息-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetAlarmInfBySN
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC104,电站中心/告警管理,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC105 JuniorBox-基础设置查询-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC105,设备参数配置/安规国家设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC106 JuniorBox-基础设置下发-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000"",
+  ""workMode"": ""3"",
+  ""powerLimit"": ""100"",
+  ""dischargeDepth"": ""20""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC106,设备参数配置/安规国家设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC107 JuniorBox-分时设置查询-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC107,设备参数配置/工作模式设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC108 JuniorBox-分时设置下发-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""mode"": ""0"",
+      ""startTime"": ""08:00"",
+      ""endTime"": ""18:00"",
+      ""power"": ""320"",
+      ""week"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC108,设备参数配置/工作模式设置,JuniorBox"
+Dyness API,Dyness Open API/电站中心/告警管理,TC121 JuniorBox-故障信息-pageSize越界,已获取访问凭证,"1. 调用 POST /v2/GetAlarmInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""pageNum"": 1,
+  ""pageSize"": 201
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC121,电站中心/告警管理,JuniorBox"
+Dyness API,Dyness Open API/电站中心/告警管理,TC122 JuniorBox-故障信息-pageSize为0,已获取访问凭证,"1. 调用 POST /v2/GetAlarmInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""pageNum"": 1,
+  ""pageSize"": 0
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC122,电站中心/告警管理,JuniorBox"
+Dyness API,Dyness Open API/电站中心/告警管理,TC123 JuniorBox-故障信息-pageSize非数字,已获取访问凭证,"1. 调用 POST /v2/GetAlarmInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""pageNum"": 1,
+  ""pageSize"": ""abc""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC123,电站中心/告警管理,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC131 JuniorBox-工作模式=自发自用,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workMode"": ""0"",
+  ""powerLimit"": ""100"",
+  ""dischargeDepth"": ""20""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC131,设备参数配置/安规国家设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC132 JuniorBox-工作模式=离网,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workMode"": ""1"",
+  ""powerLimit"": ""100"",
+  ""dischargeDepth"": ""20""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC132,设备参数配置/安规国家设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC133 JuniorBox-工作模式=经济,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workMode"": ""3"",
+  ""powerLimit"": ""100"",
+  ""dischargeDepth"": ""20""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC133,设备参数配置/安规国家设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC134 JuniorBox-工作模式=电池优先,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workMode"": ""6"",
+  ""powerLimit"": ""100"",
+  ""dischargeDepth"": ""20""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC134,设备参数配置/安规国家设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC135 JuniorBox-工作模式非法,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workMode"": ""9"",
+  ""powerLimit"": ""100"",
+  ""dischargeDepth"": ""20""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC135,设备参数配置/安规国家设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC136 JuniorBox-放电深度最小值,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workMode"": ""3"",
+  ""powerLimit"": ""100"",
+  ""dischargeDepth"": ""0""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC136,设备参数配置/安规国家设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC137 JuniorBox-放电深度最大值,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workMode"": ""3"",
+  ""powerLimit"": ""100"",
+  ""dischargeDepth"": ""100""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC137,设备参数配置/安规国家设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC138 JuniorBox-放电深度越界,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workMode"": ""3"",
+  ""powerLimit"": ""100"",
+  ""dischargeDepth"": ""101""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC138,设备参数配置/安规国家设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC139 JuniorBox-基础设置缺workMode,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""powerLimit"": ""100"",
+  ""dischargeDepth"": ""20""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC139,设备参数配置/安规国家设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC151 JuniorBox-分时功率最小值,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""mode"": ""0"",
+      ""startTime"": ""08:00"",
+      ""endTime"": ""18:00"",
+      ""power"": ""0"",
+      ""week"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC151,设备参数配置/工作模式设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC152 JuniorBox-分时功率最大值,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""mode"": ""0"",
+      ""startTime"": ""08:00"",
+      ""endTime"": ""18:00"",
+      ""power"": ""800"",
+      ""week"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC152,设备参数配置/工作模式设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC153 JuniorBox-分时功率越界,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""mode"": ""0"",
+      ""startTime"": ""08:00"",
+      ""endTime"": ""18:00"",
+      ""power"": ""801"",
+      ""week"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC153,设备参数配置/工作模式设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC154 JuniorBox-分组号越界,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 5,
+      ""state"": ""1"",
+      ""mode"": ""0"",
+      ""startTime"": ""08:00"",
+      ""endTime"": ""18:00"",
+      ""power"": ""320"",
+      ""week"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC154,设备参数配置/工作模式设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC155 JuniorBox-分组状态非法,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""2"",
+      ""mode"": ""0"",
+      ""startTime"": ""08:00"",
+      ""endTime"": ""18:00"",
+      ""power"": ""320"",
+      ""week"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC155,设备参数配置/工作模式设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC156 JuniorBox-分组模式非法,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""mode"": ""2"",
+      ""startTime"": ""08:00"",
+      ""endTime"": ""18:00"",
+      ""power"": ""320"",
+      ""week"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC156,设备参数配置/工作模式设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC157 JuniorBox-分时设置缺workGroups,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC157,设备参数配置/工作模式设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC158 JuniorBox-分时设置-缺batteryWorkGroup,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workGroups"": [
+    {
+      ""state"": ""1"",
+      ""mode"": ""0"",
+      ""startTime"": ""08:00"",
+      ""endTime"": ""18:00"",
+      ""power"": ""320"",
+      ""week"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC158,设备参数配置/工作模式设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC159 JuniorBox-分时设置-缺state,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""mode"": ""0"",
+      ""startTime"": ""08:00"",
+      ""endTime"": ""18:00"",
+      ""power"": ""320"",
+      ""week"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC159,设备参数配置/工作模式设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC160 JuniorBox-分时设置-缺power,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""mode"": ""0"",
+      ""startTime"": ""08:00"",
+      ""endTime"": ""18:00"",
+      ""week"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC160,设备参数配置/工作模式设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC161 JuniorBox-分时设置-缺startTime,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""mode"": ""0"",
+      ""endTime"": ""18:00"",
+      ""power"": ""320"",
+      ""week"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC161,设备参数配置/工作模式设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC162 JuniorBox-分时设置-缺endTime,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""mode"": ""0"",
+      ""startTime"": ""08:00"",
+      ""power"": ""320"",
+      ""week"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC162,设备参数配置/工作模式设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC163 JuniorBox-基础设置下发-缺powerLimit,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workMode"": ""3"",
+  ""dischargeDepth"": ""20""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC163,设备参数配置/安规国家设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/安规国家设置,TC164 JuniorBox-基础设置下发-缺dischargeDepth,已获取访问凭证,"1. 调用 POST /v2/SetBaseSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workMode"": ""3"",
+  ""powerLimit"": ""100""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC164,设备参数配置/安规国家设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC165 JuniorBox-分时设置-week=工作日,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""mode"": ""0"",
+      ""startTime"": ""08:00"",
+      ""endTime"": ""18:00"",
+      ""power"": ""320"",
+      ""week"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC165,设备参数配置/工作模式设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC166 JuniorBox-分时设置-week=周末,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""mode"": ""0"",
+      ""startTime"": ""08:00"",
+      ""endTime"": ""18:00"",
+      ""power"": ""320"",
+      ""week"": ""5,6""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC166,设备参数配置/工作模式设置,JuniorBox"
+Dyness API,Dyness Open API/设备参数配置/工作模式设置,TC167 JuniorBox-分时设置-week=全部,已获取访问凭证,"1. 调用 POST /v2/SetWorkModeSetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""workGroups"": [
+    {
+      ""batteryWorkGroup"": 1,
+      ""state"": ""1"",
+      ""mode"": ""0"",
+      ""startTime"": ""08:00"",
+      ""endTime"": ""18:00"",
+      ""power"": ""320"",
+      ""week"": ""0,1,2,3,4,5,6""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC167,设备参数配置/工作模式设置,JuniorBox"
+Dyness API,Dyness Open API/电站中心/设备管理,TC181 JuniorBox-设备信息-deviceSn含特殊字符,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""!@#$%^&*""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC181,电站中心/设备管理,JuniorBox"
+Dyness API,Dyness Open API/电站中心/设备管理,TC182 JuniorBox-设备信息-deviceSn超长字符串,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC182,电站中心/设备管理,JuniorBox"
+Dyness API,Dyness Open API/电站中心/设备管理,TC183 JuniorBox-设备信息-deviceSn含中文,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""设备SN001""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC183,电站中心/设备管理,JuniorBox"
+Dyness API,Dyness Open API/电站中心/设备管理,TC184 JuniorBox-设备信息-deviceSn为数组,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": [
+    ""SN001"",
+    ""SN002""
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC184,电站中心/设备管理,JuniorBox"
+Dyness API,Dyness Open API/电站中心/设备管理,TC001 低压电池-设备信息查询,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC001,电站中心/设备管理,低压电池"
+Dyness API,Dyness Open API/电站中心/数据查询,TC002 低压电池-实时运行数据,已获取访问凭证,"1. 调用 POST /v2/GetRealTimeDataBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC002,电站中心/数据查询,低压电池"
+Dyness API,Dyness Open API/电站中心/告警管理,TC003 低压电池-故障信息查询,已获取访问凭证,"1. 调用 POST /v2/GetAlarmInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""pageNum"": 1,
+  ""pageSize"": 200
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC003,电站中心/告警管理,低压电池"
+Dyness API,Dyness Open API/电站中心/设备管理,TC004 低压电池-并机信息查询,已获取访问凭证,"1. 调用 POST /v2/GetParallelInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC004,电站中心/设备管理,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC005 低压电池-电池加热查询,已获取访问凭证,"1. 调用 POST /v2/GetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC005,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC006 低压电池-电池加热下发,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC006,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/电站中心/设备管理,TC101 低压电池-设备信息-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC101,电站中心/设备管理,低压电池"
+Dyness API,Dyness Open API/电站中心/设备管理,TC102 低压电池-设备信息-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC102,电站中心/设备管理,低压电池"
+Dyness API,Dyness Open API/电站中心/设备管理,TC103 低压电池-设备信息-缺deviceSn,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：(空)","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC103,电站中心/设备管理,低压电池"
+Dyness API,Dyness Open API/电站中心/数据查询,TC104 低压电池-实时数据-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetRealTimeDataBySN
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC104,电站中心/数据查询,低压电池"
+Dyness API,Dyness Open API/电站中心/数据查询,TC105 低压电池-实时数据-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/GetRealTimeDataBySN
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC105,电站中心/数据查询,低压电池"
+Dyness API,Dyness Open API/电站中心/告警管理,TC106 低压电池-故障信息-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetAlarmInfBySN
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC106,电站中心/告警管理,低压电池"
+Dyness API,Dyness Open API/电站中心/设备管理,TC107 低压电池-并机信息-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetParallelInfBySN
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC107,电站中心/设备管理,低压电池"
+Dyness API,Dyness Open API/电站中心/设备管理,TC108 低压电池-并机信息-deviceSn为空,已获取访问凭证,"1. 调用 POST /v2/GetParallelInfBySN
+2. 请求体：{
+  ""deviceSn"": """"
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC108,电站中心/设备管理,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC109 低压电池-电池加热查询-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/GetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC109,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC110 低压电池-电池加热下发-deviceSn不存在,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC110,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC111 低压电池-电池加热下发-缺deviceSn,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC111,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/电站中心/告警管理,TC121 低压电池-故障信息-pageSize越界,已获取访问凭证,"1. 调用 POST /v2/GetAlarmInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""pageNum"": 1,
+  ""pageSize"": 201
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC121,电站中心/告警管理,低压电池"
+Dyness API,Dyness Open API/电站中心/告警管理,TC122 低压电池-故障信息-pageSize为0,已获取访问凭证,"1. 调用 POST /v2/GetAlarmInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""pageNum"": 1,
+  ""pageSize"": 0
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC122,电站中心/告警管理,低压电池"
+Dyness API,Dyness Open API/电站中心/告警管理,TC123 低压电池-故障信息-pageSize非数字,已获取访问凭证,"1. 调用 POST /v2/GetAlarmInfBySN
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""pageNum"": 1,
+  ""pageSize"": ""abc""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC123,电站中心/告警管理,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC131 低压电池-加热开关=关,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""0"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC131,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC132 低压电池-加热开关=开,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC132,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC133 低压电池-加热开关非法,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""2"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC133,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC134 低压电池-温度下限最小值,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC134,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC135 低压电池-温度下限最大值,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""15"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC135,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC136 低压电池-温度下限越界小,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""9"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC136,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC137 低压电池-温度下限越界大,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""16"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC137,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC138 低压电池-温度上限最小值,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""15"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC138,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC139 低压电池-温度上限最大值,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC139,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC140 低压电池-温度上限越界小,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""14"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC140,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC141 低压电池-温度上限越界大,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""21"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC141,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC142 低压电池-加热温差不足5度,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""12"",
+      ""tempMax"": ""16"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500",2,接口测试,功能测试,"TC142,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC143 低压电池-开始时间格式错误,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""abc"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC143,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC144 低压电池-加热时段超过4组,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    [
+      {
+        ""status"": ""1"",
+        ""startTime"": ""08:30"",
+        ""endTime"": ""10:30"",
+        ""tempMin"": ""10"",
+        ""tempMax"": ""20"",
+        ""weekInfo"": ""0,1,2,3,4""
+      }
+    ],
+    [
+      {
+        ""status"": ""1"",
+        ""startTime"": ""08:30"",
+        ""endTime"": ""10:30"",
+        ""tempMin"": ""10"",
+        ""tempMax"": ""20"",
+        ""weekInfo"": ""0,1,2,3,4""
+      }
+    ],
+    [
+      {
+        ""status"": ""1"",
+        ""startTime"": ""08:30"",
+        ""endTime"": ""10:30"",
+        ""tempMin"": ""10"",
+        ""tempMax"": ""20"",
+        ""weekInfo"": ""0,1,2,3,4""
+      }
+    ],
+    [
+      {
+        ""status"": ""1"",
+        ""startTime"": ""08:30"",
+        ""endTime"": ""10:30"",
+        ""tempMin"": ""10"",
+        ""tempMax"": ""20"",
+        ""weekInfo"": ""0,1,2,3,4""
+      }
+    ],
+    [
+      {
+        ""status"": ""1"",
+        ""startTime"": ""08:30"",
+        ""endTime"": ""10:30"",
+        ""tempMin"": ""10"",
+        ""tempMax"": ""20"",
+        ""weekInfo"": ""0,1,2,3,4""
+      }
+    ]
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC144,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC151 低压电池-加热-weekInfo=工作日,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC151,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC152 低压电池-加热-weekInfo=周末,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""5,6""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC152,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC153 低压电池-加热-weekInfo=全部,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4,5,6""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC153,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC154 低压电池-加热-weekInfo=单天,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC154,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC155 低压电池-加热-weekInfo=空数组,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": """"
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC155,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC161 低压电池-加热下发-缺heatingPeriodList,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC161,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC162 低压电池-加热下发-时段缺status,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC162,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC163 低压电池-加热下发-时段缺startTime,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC163,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC164 低压电池-加热下发-时段缺endTime,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""tempMin"": ""10"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC164,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC165 低压电池-加热下发-时段缺tempMin,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMax"": ""20"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC165,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/设备参数配置/电池参数设置,TC166 低压电池-加热下发-时段缺tempMax,已获取访问凭证,"1. 调用 POST /v2/SetBatterySetting
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""heatingPeriodList"": [
+    {
+      ""status"": ""1"",
+      ""startTime"": ""08:30"",
+      ""endTime"": ""10:30"",
+      ""tempMin"": ""10"",
+      ""weekInfo"": ""0,1,2,3,4""
+    }
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC166,设备参数配置/电池参数设置,低压电池"
+Dyness API,Dyness Open API/电站中心/设备管理,TC181 低压电池-设备信息-deviceSn含特殊字符,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""SN@#$%001""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC181,电站中心/设备管理,低压电池"
+Dyness API,Dyness Open API/电站中心/设备管理,TC182 低压电池-设备信息-deviceSn超长,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC182,电站中心/设备管理,低压电池"
+Dyness API,Dyness Open API/电站中心/设备管理,TC183 低压电池-设备信息-deviceSn含空格,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""SN 001""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC183,电站中心/设备管理,低压电池"
+Dyness API,Dyness Open API/电站中心/设备管理,TC184 低压电池-设备信息-deviceSn为对象,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": {
+    ""sn"": ""001""
+  }
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC184,电站中心/设备管理,低压电池"
+Dyness API,Dyness Open API/电站中心/设备管理,TC185 低压电池-设备信息-deviceSn为undefined,已获取访问凭证,"1. 调用 POST /v2/GetDeviceInfBySN
+2. 请求体：{
+  ""deviceSn"": ""undefined""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC185,电站中心/设备管理,低压电池"
+Dyness API,Dyness Open API/OTA升级/固件列表,TC001 固件列表查询,已获取访问凭证,"1. 调用 POST /firmware/list
+2. 请求体：{
+  ""pageNum"": 1,
+  ""pageSize"": 20
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",1,接口测试,冒烟测试,"TC001,OTA升级/固件列表,OTA升级"
+Dyness API,Dyness Open API/OTA升级/固件列表,TC002 固件交集列表查询,已获取访问凭证,"1. 调用 POST /firmware/common/list
+2. 请求体：{
+  ""pageNum"": 1,
+  ""pageSize"": 20
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC002,OTA升级/固件列表,OTA升级"
+Dyness API,Dyness Open API/OTA升级/固件详情,TC003 固件详情查询,已获取访问凭证,"1. 调用 POST /firmware/manager/detail
+2. 请求体：{
+  ""id"": ""1""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC003,OTA升级/固件详情,OTA升级"
+Dyness API,Dyness Open API/OTA升级/ROM类型,TC004 ROM类型查询,已获取访问凭证,"1. 调用 POST /firmware/getOtaAllRomType
+2. 请求体：(空)","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC004,OTA升级/ROM类型,OTA升级"
+Dyness API,Dyness Open API/OTA升级/电池类型,TC005 电池类型查询,已获取访问凭证,"1. 调用 POST /firmware/getOtaBatteryTypeList
+2. 请求体：(空)","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC005,OTA升级/电池类型,OTA升级"
+Dyness API,Dyness Open API/OTA升级/最新版本,TC006 最新固件版本查询,已获取访问凭证,"1. 调用 POST /firmware/latest/getCanUpgradeFirmwareVersion
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC006,OTA升级/最新版本,OTA升级"
+Dyness API,Dyness Open API/OTA升级/升级记录,TC011 升级记录列表,已获取访问凭证,"1. 调用 POST /firmware/ota/record/list
+2. 请求体：{
+  ""pageNum"": 1,
+  ""pageSize"": 20,
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC011,OTA升级/升级记录,OTA升级"
+Dyness API,Dyness Open API/OTA升级/升级任务列表,TC012 升级任务列表,已获取访问凭证,"1. 调用 POST /firmware/manager/task/page
+2. 请求体：{
+  ""pageNum"": 1,
+  ""pageSize"": 20
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC012,OTA升级/升级任务列表,OTA升级"
+Dyness API,Dyness Open API/OTA升级/升级任务详情,TC013 升级任务详情,已获取访问凭证,"1. 调用 POST /firmware/manager/task/detail
+2. 请求体：{
+  ""taskId"": ""1""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC013,OTA升级/升级任务详情,OTA升级"
+Dyness API,Dyness Open API/OTA升级/任务设备列表,TC014 任务设备列表,已获取访问凭证,"1. 调用 POST /firmware/manager/task/device/page
+2. 请求体：{
+  ""taskId"": ""1"",
+  ""pageNum"": 1,
+  ""pageSize"": 20
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC014,OTA升级/任务设备列表,OTA升级"
+Dyness API,Dyness Open API/OTA升级/设备升级检查,TC021 设备OTA检查,已获取访问凭证,"1. 调用 POST /device/check/ota
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC021,OTA升级/设备升级检查,OTA升级"
+Dyness API,Dyness Open API/OTA升级/设备升级检查,TC022 设备升级检查,已获取访问凭证,"1. 调用 POST /device/check/upgrade
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC022,OTA升级/设备升级检查,OTA升级"
+Dyness API,Dyness Open API/OTA升级/设备升级检查,TC023 设备是否可OTA,已获取访问凭证,"1. 调用 POST /device/whetherCanOta
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC023,OTA升级/设备升级检查,OTA升级"
+Dyness API,Dyness Open API/OTA升级/禁升名单,TC031 禁升名单分页查询,已获取访问凭证,"1. 调用 POST /firmware/disable-upgrade/page
+2. 请求体：{
+  ""pageNum"": 1,
+  ""pageSize"": 20
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC031,OTA升级/禁升名单,OTA升级"
+Dyness API,Dyness Open API/OTA升级/禁升名单查询,TC032 禁升名单有效SN查询,已获取访问凭证,"1. 调用 POST /firmware/disable-upgrade/effective/list
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC032,OTA升级/禁升名单查询,OTA升级"
+Dyness API,Dyness Open API/OTA升级/可下发设备列表,TC033 可下发设备列表,已获取访问凭证,"1. 调用 POST /firmware/manager/enableSnList
+2. 请求体：{
+  ""firmwareId"": ""1""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC033,OTA升级/可下发设备列表,OTA升级"
+Dyness API,Dyness Open API/OTA升级/固件升级(运营端),TC101 运营端固件升级,已获取访问凭证,"1. 调用 POST /firmware/ota
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""firmwareId"": ""1""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",4,接口测试,功能测试,"TC101,OTA升级/固件升级(运营端),OTA升级,[危险]"
+Dyness API,Dyness Open API/OTA升级/固件升级,TC102 伙伴端固件升级,已获取访问凭证,"1. 调用 POST /firmware/upgrade
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""firmwareId"": ""1""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",4,接口测试,功能测试,"TC102,OTA升级/固件升级,OTA升级,[危险]"
+Dyness API,Dyness Open API/OTA升级/升级结果查询,TC103 固件升级结果查询V3,已获取访问凭证,"1. 调用 POST /firmware/upgrade/resultV3
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",2,接口测试,功能测试,"TC103,OTA升级/升级结果查询,OTA升级"
+Dyness API,Dyness Open API/OTA升级/固件下发,TC111 固件统一下发,已获取访问凭证,"1. 调用 POST /firmware/manager/issue
+2. 请求体：{
+  ""firmwareId"": ""1"",
+  ""deviceSnList"": [
+    ""{{deviceSn}}""
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",4,接口测试,功能测试,"TC111,OTA升级/固件下发,OTA升级,[危险]"
+Dyness API,Dyness Open API/OTA升级/删除固件,TC121 固件删除,已获取访问凭证,"1. 调用 POST /firmware/manager/delete
+2. 请求体：{
+  ""id"": ""99999""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",3,接口测试,功能测试,"TC121,OTA升级/删除固件,OTA升级,[警告]"
+Dyness API,Dyness Open API/OTA升级/停用升级任务,TC122 停用升级任务,已获取访问凭证,"1. 调用 POST /firmware/manager/task/disable
+2. 请求体：{
+  ""taskId"": ""99999""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",3,接口测试,功能测试,"TC122,OTA升级/停用升级任务,OTA升级,[警告]"
+Dyness API,Dyness Open API/OTA升级/禁升名单新增,TC131 禁升名单新增,已获取访问凭证,"1. 调用 POST /firmware/disable-upgrade/save
+2. 请求体：{
+  ""deviceSn"": ""{{deviceSn}}"",
+  ""firmwareId"": ""1"",
+  ""reason"": ""测试""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",3,接口测试,功能测试,"TC131,OTA升级/禁升名单新增,OTA升级,[警告]"
+Dyness API,Dyness Open API/OTA升级/禁升名单删除,TC132 禁升名单删除,已获取访问凭证,"1. 调用 POST /firmware/disable-upgrade/delete
+2. 请求体：{
+  ""id"": ""99999""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 200",3,接口测试,功能测试,"TC132,OTA升级/禁升名单删除,OTA升级,[警告]"
+Dyness API,Dyness Open API/OTA升级/固件列表,TC201 固件列表-pageSize越界,已获取访问凭证,"1. 调用 POST /firmware/list
+2. 请求体：{
+  ""pageNum"": 1,
+  ""pageSize"": 1001
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",2,接口测试,功能测试,"TC201,OTA升级/固件列表,OTA升级"
+Dyness API,Dyness Open API/OTA升级/固件升级(运营端),TC202 固件升级-缺deviceSn,已获取访问凭证,"1. 调用 POST /firmware/ota
+2. 请求体：{
+  ""firmwareId"": ""1""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",4,接口测试,功能测试,"TC202,OTA升级/固件升级(运营端),OTA升级,[危险]"
+Dyness API,Dyness Open API/OTA升级/固件升级(运营端),TC203 固件升级-deviceSn不存在,已获取访问凭证,"1. 调用 POST /firmware/ota
+2. 请求体：{
+  ""deviceSn"": ""NOT_EXIST_SN_000"",
+  ""firmwareId"": ""1""
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",4,接口测试,功能测试,"TC203,OTA升级/固件升级(运营端),OTA升级,[危险]"
+Dyness API,Dyness Open API/OTA升级/固件下发,TC204 固件下发-缺firmwareId,已获取访问凭证,"1. 调用 POST /firmware/manager/issue
+2. 请求体：{
+  ""deviceSnList"": [
+    ""{{deviceSn}}""
+  ]
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",4,接口测试,功能测试,"TC204,OTA升级/固件下发,OTA升级,[危险]"
+Dyness API,Dyness Open API/OTA升级/固件下发,TC205 固件下发-空设备列表,已获取访问凭证,"1. 调用 POST /firmware/manager/issue
+2. 请求体：{
+  ""firmwareId"": ""1"",
+  ""deviceSnList"": []
+}","1. HTTP 状态码 = 200
+2. 业务码 code = 500（参数错误）",4,接口测试,功能测试,"TC205,OTA升级/固件下发,OTA升级,[危险]"

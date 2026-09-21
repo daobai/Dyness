@@ -60,6 +60,8 @@ def load_cases(csv_file):
             "description": (row.get("description") or "").strip(),
             "models": parse_models(row.get("models")),
             "module": (row.get("module") or "").strip(),
+            "func_module": (row.get("func_module") or "").strip(),
+            "risk": (row.get("risk") or "").strip(),
             "smoke": (row.get("smoke") or "").strip(),
         })
     return cases

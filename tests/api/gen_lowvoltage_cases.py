@@ -13,20 +13,54 @@ from pathlib import Path
 OUT = Path(__file__).resolve().parent / "data" / "api_lowvoltage.csv"
 FIELDS = ["case_id", "name", "method", "path", "headers", "params", "body",
           "expected_status", "expected_code", "assertions", "description", "enabled",
-          "models", "module", "smoke"]
+          "models", "module", "func_module", "risk", "smoke"]
 
 SN = "{{deviceSn}}"
 BAD_SN = "NOT_EXIST_SN_000"
 
+# 接口路径 -> 功能模块映射（一级模块/二级模块 层级格式，详见 config/biz_module_tree.md）
+_FUNC_MODULE_MAP = {
+    # 电站中心
+    "GetDeviceInfBySN": "电站中心/设备管理",
+    "GetRealTimeDataBySN": "电站中心/数据查询",
+    "GetAlarmInfBySN": "电站中心/告警管理",
+    "GetParallelInfBySN": "电站中心/设备管理",
+    # 设备参数配置
+    "GetBatterySetting": "设备参数配置/电池参数设置",
+    "SetBatterySetting": "设备参数配置/电池参数设置",
+}
+
+
+def _get_risk(path, body):
+    """根据接口路径和请求体判断风险等级。"""
+    api_name = path.rstrip("/").split("/")[-1]
+    if not isinstance(body, dict):
+        return ""
+    # 工商业高级设置 - systemReset/reset/faultReset 参数
+    if api_name == "SetCommerceAdvancedSetting":
+        if "systemReset" in body or "reset" in body or "faultReset" in body:
+            return "danger"
+    # 户用高级参数 - systemReset 参数
+    if api_name == "SetAdvancedSetting":
+        if "systemReset" in body:
+            return "danger"
+    return ""
+
+
+def _get_func_module(path):
+    """根据接口路径推断功能模块。"""
+    api_name = path.rstrip("/").split("/")[-1]
+    return _FUNC_MODULE_MAP.get(api_name, "")
+
 
 def c(case_id, name, path, body, assertions, description, enabled="1", models="",
-      expected_code="200", module="lowvoltage", smoke="0"):
+      expected_code="200", module="lowvoltage", risk="", smoke="0"):
     return {
         "case_id": case_id, "name": name, "method": "POST", "path": path,
         "headers": None, "params": None, "body": body,
         "expected_status": 200, "expected_code": expected_code, "assertions": assertions,
         "description": description, "enabled": enabled, "models": models,
-        "module": module, "smoke": smoke,
+        "module": module, "func_module": _get_func_module(path), "risk": risk or _get_risk(path, body), "smoke": smoke,
     }
 
 
@@ -124,6 +158,59 @@ CASES = [
     c("TC144", "低压电池-加热时段超过4组", "/v2/SetBatterySetting",
       {"deviceSn": SN, "heatingPeriodList": [_hp() for _ in range(5)]},
       "", "边界外:heatingPeriodList=5组(最多4组)", expected_code="500"),
+
+    # ===== 枚举覆盖补充：weekInfo 字段 =====
+    c("TC151", "低压电池-加热-weekInfo=工作日", "/v2/SetBatterySetting",
+      {"deviceSn": SN, "heatingPeriodList": _hp(weekInfo="0,1,2,3,4")},
+      "$.code == 200", "枚举值:weekInfo=0,1,2,3,4(工作日)", "200"),
+    c("TC152", "低压电池-加热-weekInfo=周末", "/v2/SetBatterySetting",
+      {"deviceSn": SN, "heatingPeriodList": _hp(weekInfo="5,6")},
+      "$.code == 200", "枚举值:weekInfo=5,6(周末)", "200"),
+    c("TC153", "低压电池-加热-weekInfo=全部", "/v2/SetBatterySetting",
+      {"deviceSn": SN, "heatingPeriodList": _hp(weekInfo="0,1,2,3,4,5,6")},
+      "$.code == 200", "枚举值:weekInfo=0,1,2,3,4,5,6(全部)", "200"),
+    c("TC154", "低压电池-加热-weekInfo=单天", "/v2/SetBatterySetting",
+      {"deviceSn": SN, "heatingPeriodList": _hp(weekInfo="0")},
+      "$.code == 200", "枚举值:weekInfo=0(周一)", "200"),
+    c("TC155", "低压电池-加热-weekInfo=空数组", "/v2/SetBatterySetting",
+      {"deviceSn": SN, "heatingPeriodList": _hp(weekInfo="")},
+      "$.code == 200", "枚举值:weekInfo=空(不限制)", "200"),
+
+    # ===== 必填字段缺失补充 =====
+    c("TC161", "低压电池-加热下发-缺heatingPeriodList", "/v2/SetBatterySetting",
+      {"deviceSn": SN}, "", "必填缺失:缺heatingPeriodList", expected_code="500"),
+    c("TC162", "低压电池-加热下发-时段缺status", "/v2/SetBatterySetting",
+      {"deviceSn": SN, "heatingPeriodList": [{"startTime": "08:30", "endTime": "10:30",
+       "tempMin": "10", "tempMax": "20", "weekInfo": "0,1,2,3,4"}]},
+      "", "必填缺失:时段缺status", expected_code="500"),
+    c("TC163", "低压电池-加热下发-时段缺startTime", "/v2/SetBatterySetting",
+      {"deviceSn": SN, "heatingPeriodList": [{"status": "1", "endTime": "10:30",
+       "tempMin": "10", "tempMax": "20", "weekInfo": "0,1,2,3,4"}]},
+      "", "必填缺失:时段缺startTime", expected_code="500"),
+    c("TC164", "低压电池-加热下发-时段缺endTime", "/v2/SetBatterySetting",
+      {"deviceSn": SN, "heatingPeriodList": [{"status": "1", "startTime": "08:30",
+       "tempMin": "10", "tempMax": "20", "weekInfo": "0,1,2,3,4"}]},
+      "", "必填缺失:时段缺endTime", expected_code="500"),
+    c("TC165", "低压电池-加热下发-时段缺tempMin", "/v2/SetBatterySetting",
+      {"deviceSn": SN, "heatingPeriodList": [{"status": "1", "startTime": "08:30",
+       "endTime": "10:30", "tempMax": "20", "weekInfo": "0,1,2,3,4"}]},
+      "", "必填缺失:时段缺tempMin", expected_code="500"),
+    c("TC166", "低压电池-加热下发-时段缺tempMax", "/v2/SetBatterySetting",
+      {"deviceSn": SN, "heatingPeriodList": [{"status": "1", "startTime": "08:30",
+       "endTime": "10:30", "tempMin": "10", "weekInfo": "0,1,2,3,4"}]},
+      "", "必填缺失:时段缺tempMax", expected_code="500"),
+
+    # ===== deviceSn 错误参数补充 =====
+    c("TC181", "低压电池-设备信息-deviceSn含特殊字符", "/v2/GetDeviceInfBySN",
+      {"deviceSn": "SN@#$%001"}, "", "特殊参数:deviceSn含特殊字符", expected_code="500"),
+    c("TC182", "低压电池-设备信息-deviceSn超长", "/v2/GetDeviceInfBySN",
+      {"deviceSn": "L" * 300}, "", "特殊参数:deviceSn超长(300字符)", expected_code="500"),
+    c("TC183", "低压电池-设备信息-deviceSn含空格", "/v2/GetDeviceInfBySN",
+      {"deviceSn": "SN 001"}, "", "特殊参数:deviceSn含空格", expected_code="500"),
+    c("TC184", "低压电池-设备信息-deviceSn为对象", "/v2/GetDeviceInfBySN",
+      {"deviceSn": {"sn": "001"}}, "", "特殊参数:deviceSn为对象", expected_code="500"),
+    c("TC185", "低压电池-设备信息-deviceSn为undefined", "/v2/GetDeviceInfBySN",
+      {"deviceSn": "undefined"}, "", "特殊参数:deviceSn='undefined'字符串", expected_code="500"),
 ]
 
 

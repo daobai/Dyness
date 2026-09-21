@@ -34,17 +34,32 @@ def pytest_addoption(parser):
     parser.addoption("--request-interval", action="store", default=None, help="请求间隔(秒)，控制频率避免触发接口限流")
     parser.addoption("--model", action="store", default=None, help="手动指定机型（AquaVolt/AquaVolt_LV/SolarCube），探测失败时兜底")
     parser.addoption("--no-restore", action="store_true", default=False, help="测试后不恢复设备参数（默认自动恢复）")
-    parser.addoption("--module", action="store", default=None, help="按模块筛选用例（逗号分隔，如 cygni,commerce）")
+    parser.addoption("--module", action="store", default=None, help="按设备模块筛选用例（逗号分隔，如 cygni,commerce）")
+    parser.addoption("--func-module", action="store", default=None, help="按功能模块筛选用例（逗号分隔，如 电站中心,设备参数配置/电池参数设置）")
     parser.addoption("--smoke", action="store_true", default=False, help="只跑冒烟用例（核心查询，不跑下发）")
+    parser.addoption("--include-danger", action="store_true", default=False, help="包含危险用例（关机/恢复出厂/系统重启等，默认跳过）")
+
+
+def _match_func_module(case_func_module, filter_modules):
+    """匹配功能模块，支持前缀匹配（如 '电站中心' 匹配 '电站中心/设备管理'）。"""
+    for fm in filter_modules:
+        if case_func_module == fm:
+            return True
+        if case_func_module.startswith(fm + "/"):
+            return True
+    return False
 
 
 def pytest_collection_modifyitems(config, items):
-    """按 --module / --smoke 筛选用例（collect 后，不匹配的不执行）。"""
+    """按 --module / --func-module / --smoke / --include-danger 筛选用例。"""
     module_arg = config.getoption("--module") or ""
+    func_module_arg = config.getoption("--func-module") or ""
     smoke = config.getoption("--smoke")
-    if not module_arg and not smoke:
+    include_danger = config.getoption("--include-danger")
+    if not module_arg and not func_module_arg and not smoke and include_danger:
         return
     modules = {m.strip() for m in module_arg.split(",") if m.strip()}
+    func_modules = {m.strip() for m in func_module_arg.split(",") if m.strip()}
     selected = []
     for item in items:
         cs = getattr(item, "callspec", None)
@@ -54,7 +69,12 @@ def pytest_collection_modifyitems(config, items):
             continue
         if modules and case.get("module") not in modules:
             continue
+        if func_modules and not _match_func_module(case.get("func_module", ""), func_modules):
+            continue
         if smoke and case.get("smoke") != "1":
+            continue
+        # 危险用例默认跳过，需 --include-danger 显式开启
+        if not include_danger and case.get("risk") == "danger":
             continue
         selected.append(item)
     items[:] = selected

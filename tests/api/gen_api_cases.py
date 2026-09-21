@@ -12,19 +12,81 @@ from pathlib import Path
 OUT = Path(__file__).resolve().parent / "data" / "api_household.csv"
 FIELDS = ["case_id", "name", "method", "path", "headers", "params", "body",
           "expected_status", "expected_code", "assertions", "description", "enabled",
-          "models", "module", "smoke"]
+          "models", "module", "func_module", "risk", "smoke"]
 
 SN = "{{deviceSn}}"  # 模板变量，运行时替换为当前设备的 SN
 
+# 风险等级说明：
+# - 空（safe）: 安全，查询类或普通参数下发，默认执行
+# - warning: 警告，会改变设备运行状态但可恢复，默认执行
+# - danger: 危险，关机/恢复出厂/系统重启等不可逆操作，需 --include-danger 才执行
+
+
+def _get_risk(path, body):
+    """根据接口路径和请求体判断风险等级。"""
+    api_name = path.rstrip("/").split("/")[-1]
+    if not isinstance(body, dict):
+        return ""
+    # 工商业高级设置 - systemReset/reset/faultReset 参数
+    if api_name == "SetCommerceAdvancedSetting":
+        if "systemReset" in body or "reset" in body or "faultReset" in body:
+            return "danger"
+    # 户用高级参数 - systemReset 参数
+    if api_name == "SetAdvancedSetting":
+        if "systemReset" in body:
+            return "danger"
+    return ""
+
+
+# 接口路径 -> 功能模块映射（一级模块/二级模块 层级格式，详见 config/biz_module_tree.md）
+_FUNC_MODULE_MAP = {
+    # 电站中心
+    "GetDeviceList": "电站中心/电站管理",
+    "GetDeviceInfBySN": "电站中心/设备管理",
+    "GetStatusInfBySN": "电站中心/设备管理",
+    "GetRealTimeDataBySN": "电站中心/数据查询",
+    "GetTotalEnergyDataBySN": "电站中心/数据查询",
+    "GetAlarmInfBySN": "电站中心/告警管理",
+    "GetParallelInfBySN": "电站中心/设备管理",
+    # 设备参数配置
+    "GetBaseSetting": "设备参数配置/安规国家设置",
+    "SetBaseSetting": "设备参数配置/安规国家设置",
+    "GetWorkModeSetting": "设备参数配置/工作模式设置",
+    "SetWorkModeSetting": "设备参数配置/工作模式设置",
+    "GetBatterySetting": "设备参数配置/电池参数设置",
+    "SetBatterySetting": "设备参数配置/电池参数设置",
+    "GetLoadControlSetting": "设备参数配置/负载控制设置",
+    "SetLoadControlSetting": "设备参数配置/负载控制设置",
+    "GetPeakControlSetting": "设备参数配置/峰值控制设置",
+    "SetPeakControlSetting": "设备参数配置/峰值控制设置",
+    "GetAdvancedSetting": "设备参数配置/高级参数设置",
+    "SetAdvancedSetting": "设备参数配置/高级参数设置",
+    "GetGeneratorControlSetting": "设备参数配置/发电机控制",
+    "SetGeneratorControlSetting": "设备参数配置/发电机控制",
+    # 工商业储能
+    "SetCommerceSystemSetting": "工商业储能/系统设置",
+    "SetCommerceBatterySetting": "工商业储能/电池参数",
+    "SetCommerceRunModeSetting": "工商业储能/运行模式",
+    "SetCommercePeakValleyPeriodSetting": "工商业储能/峰谷时段",
+    "SetCommerceAdvancedSetting": "工商业储能/高级设置",
+}
+
+
+def _get_func_module(path):
+    """根据接口路径推断功能模块。"""
+    api_name = path.rstrip("/").split("/")[-1]
+    return _FUNC_MODULE_MAP.get(api_name, "")
+
 
 def c(case_id, name, path, body, assertions, description, enabled="1", models="",
-      expected_code="200", module="household", smoke="0"):
+      expected_code="200", module="household", risk="", smoke="0"):
     return {
         "case_id": case_id, "name": name, "method": "POST", "path": path,
         "headers": None, "params": None, "body": body,
         "expected_status": 200, "expected_code": expected_code, "assertions": assertions,
         "description": description, "enabled": enabled, "models": models,
-        "module": module, "smoke": smoke,
+        "module": module, "func_module": _get_func_module(path),
+        "risk": risk or _get_risk(path, body), "smoke": smoke,
     }
 
 

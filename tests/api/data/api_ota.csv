@@ -1,0 +1,30 @@
+case_id,name,method,path,headers,params,body,expected_status,expected_code,assertions,description,enabled,models,module,func_module,risk,smoke
+TC001,固件列表查询,POST,/firmware/list,,,"{""pageNum"":1,""pageSize"":20}",200,200,$.code == 200,查询:固件列表,1,,ota,OTA升级/固件列表,,1
+TC002,固件交集列表查询,POST,/firmware/common/list,,,"{""pageNum"":1,""pageSize"":20}",200,200,$.code == 200,查询:固件交集列表,1,,ota,OTA升级/固件列表,,0
+TC003,固件详情查询,POST,/firmware/manager/detail,,,"{""id"":""1""}",200,200,$.code == 200,查询:固件详情,1,,ota,OTA升级/固件详情,,0
+TC004,ROM类型查询,POST,/firmware/getOtaAllRomType,,,{},200,200,$.code == 200,查询:ROM类型列表,1,,ota,OTA升级/ROM类型,,0
+TC005,电池类型查询,POST,/firmware/getOtaBatteryTypeList,,,{},200,200,$.code == 200,查询:电池类型列表,1,,ota,OTA升级/电池类型,,0
+TC006,最新固件版本查询,POST,/firmware/latest/getCanUpgradeFirmwareVersion,,,"{""deviceSn"":""{{deviceSn}}""}",200,200,$.code == 200,查询:最新可升级版本,1,,ota,OTA升级/最新版本,,0
+TC011,升级记录列表,POST,/firmware/ota/record/list,,,"{""pageNum"":1,""pageSize"":20,""deviceSn"":""{{deviceSn}}""}",200,200,$.code == 200,查询:升级记录,1,,ota,OTA升级/升级记录,,0
+TC012,升级任务列表,POST,/firmware/manager/task/page,,,"{""pageNum"":1,""pageSize"":20}",200,200,$.code == 200,查询:升级任务列表,1,,ota,OTA升级/升级任务列表,,0
+TC013,升级任务详情,POST,/firmware/manager/task/detail,,,"{""taskId"":""1""}",200,200,$.code == 200,查询:升级任务详情,1,,ota,OTA升级/升级任务详情,,0
+TC014,任务设备列表,POST,/firmware/manager/task/device/page,,,"{""taskId"":""1"",""pageNum"":1,""pageSize"":20}",200,200,$.code == 200,查询:任务设备列表,1,,ota,OTA升级/任务设备列表,,0
+TC021,设备OTA检查,POST,/device/check/ota,,,"{""deviceSn"":""{{deviceSn}}""}",200,200,$.code == 200,查询:设备是否有OTA固件,1,,ota,OTA升级/设备升级检查,,0
+TC022,设备升级检查,POST,/device/check/upgrade,,,"{""deviceSn"":""{{deviceSn}}""}",200,200,$.code == 200,查询:设备是否可升级,1,,ota,OTA升级/设备升级检查,,0
+TC023,设备是否可OTA,POST,/device/whetherCanOta,,,"{""deviceSn"":""{{deviceSn}}""}",200,200,$.code == 200,查询:设备是否可OTA,1,,ota,OTA升级/设备升级检查,,0
+TC031,禁升名单分页查询,POST,/firmware/disable-upgrade/page,,,"{""pageNum"":1,""pageSize"":20}",200,200,$.code == 200,查询:禁升名单,1,,ota,OTA升级/禁升名单,,0
+TC032,禁升名单有效SN查询,POST,/firmware/disable-upgrade/effective/list,,,"{""deviceSn"":""{{deviceSn}}""}",200,200,$.code == 200,查询:有效禁升SN,1,,ota,OTA升级/禁升名单查询,,0
+TC033,可下发设备列表,POST,/firmware/manager/enableSnList,,,"{""firmwareId"":""1""}",200,200,$.code == 200,查询:可下发设备列表,1,,ota,OTA升级/可下发设备列表,,0
+TC101,运营端固件升级,POST,/firmware/ota,,,"{""deviceSn"":""{{deviceSn}}"",""firmwareId"":""1""}",200,200,$.code == 200,下发:固件升级(运营端),1,,ota,OTA升级/固件升级(运营端),danger,0
+TC102,伙伴端固件升级,POST,/firmware/upgrade,,,"{""deviceSn"":""{{deviceSn}}"",""firmwareId"":""1""}",200,200,$.code == 200,下发:固件升级(伙伴端),1,,ota,OTA升级/固件升级,danger,0
+TC103,固件升级结果查询V3,POST,/firmware/upgrade/resultV3,,,"{""deviceSn"":""{{deviceSn}}""}",200,200,$.code == 200,查询:升级结果V3,1,,ota,OTA升级/升级结果查询,,0
+TC111,固件统一下发,POST,/firmware/manager/issue,,,"{""firmwareId"":""1"",""deviceSnList"":[""{{deviceSn}}""]}",200,200,$.code == 200,下发:固件统一下发,1,,ota,OTA升级/固件下发,danger,0
+TC121,固件删除,POST,/firmware/manager/delete,,,"{""id"":""99999""}",200,200,$.code == 200,下发:删除固件,1,,ota,OTA升级/删除固件,warning,0
+TC122,停用升级任务,POST,/firmware/manager/task/disable,,,"{""taskId"":""99999""}",200,200,$.code == 200,下发:停用升级任务,1,,ota,OTA升级/停用升级任务,warning,0
+TC131,禁升名单新增,POST,/firmware/disable-upgrade/save,,,"{""deviceSn"":""{{deviceSn}}"",""firmwareId"":""1"",""reason"":""测试""}",200,200,$.code == 200,下发:禁升名单新增,1,,ota,OTA升级/禁升名单新增,warning,0
+TC132,禁升名单删除,POST,/firmware/disable-upgrade/delete,,,"{""id"":""99999""}",200,200,$.code == 200,下发:禁升名单删除,1,,ota,OTA升级/禁升名单删除,warning,0
+TC201,固件列表-pageSize越界,POST,/firmware/list,,,"{""pageNum"":1,""pageSize"":1001}",200,200,,边界外:pageSize=1001,1,,ota,OTA升级/固件列表,,0
+TC202,固件升级-缺deviceSn,POST,/firmware/ota,,,"{""firmwareId"":""1""}",200,200,,必填缺失:缺deviceSn,1,,ota,OTA升级/固件升级(运营端),danger,0
+TC203,固件升级-deviceSn不存在,POST,/firmware/ota,,,"{""deviceSn"":""NOT_EXIST_SN_000"",""firmwareId"":""1""}",200,200,,异常:deviceSn不存在,1,,ota,OTA升级/固件升级(运营端),danger,0
+TC204,固件下发-缺firmwareId,POST,/firmware/manager/issue,,,"{""deviceSnList"":[""{{deviceSn}}""]}",200,200,,必填缺失:缺firmwareId,1,,ota,OTA升级/固件下发,danger,0
+TC205,固件下发-空设备列表,POST,/firmware/manager/issue,,,"{""firmwareId"":""1"",""deviceSnList"":[]}",200,200,,特殊参数:空设备列表,1,,ota,OTA升级/固件下发,danger,0

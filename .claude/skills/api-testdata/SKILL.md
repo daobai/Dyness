@@ -62,6 +62,46 @@ py -3 tests/api/gen_api_negative_cases.py  # 异常/边界
 
 ## 测试设计规范（实战要点）
 
+### 测试设计方法总览
+
+当前项目使用以下测试设计方法，每个接口/参数都应覆盖：
+
+| 方法 | 说明 | 示例 |
+|------|------|------|
+| **正常流** | 使用合理参数值验证接口基本功能 | `controlMode=1` → code=200 |
+| **边界值** | 取参数范围的最小值和最大值 | `offGridCutoffSoc=5`(最小)、`50`(最大) → code=200 |
+| **边界外（越界）** | 取边界值 ±1，验证超出范围被拒绝 | `offGridCutoffSoc=4`(最小-1)、`51`(最大+1) → code=500 |
+| **枚举非法** | 传入不在枚举范围内的值 | `workMode=99`(枚举外) → code=500 |
+| **枚举覆盖** | 遍历枚举的所有合法值 | `safetyCountry` 0/2/37/43/46/106 逐值验证 → code=200 |
+| **必填缺失** | 不传必填参数 | 缺 `workGroups` → code=500 |
+| **特殊参数** | 类型错误、格式错误、非挡位值等 | `pageSize="abc"`(类型错误)、`powerLevelSetting=705`(非10W挡位) |
+| **异常设备标识** | deviceSn 各种异常场景 | 不存在、空字符串、特殊字符、超长、含空格、格式错误 |
+| **分页参数** | 分页接口的 pageSize 边界 | `pageSize=201`(超最大200)、`pageSize=0` |
+| **约束验证** | 参数之间的依赖/约束关系 | 温差 ≥5°C、`tempMin < tempMax` |
+
+### 异常设备标识（deviceSn）测试
+
+所有接口的 deviceSn 参数都需要覆盖以下异常场景：
+
+| 场景 | 取值示例 | 预期 |
+|------|---------|------|
+| 不存在 | `NOT_EXIST_SN_000` | code=500 |
+| 空字符串 | `""` | code=500 |
+| 缺失 | 不传 deviceSn | code=500 |
+| 含特殊字符 | `@#$%^&*()` | code=500 |
+| 超长字符串 | `"A" * 300` | code=500 |
+| 含空格 | `"SN 001 TEST"` | code=500 |
+| 纯数字 | `"12345678901234567890"` | code=500 |
+| 含中文 | `"设备SN001"` | code=500 |
+| null 字符串 | `"null"` | code=500 |
+| undefined 字符串 | `"undefined"` | code=500 |
+| 含换行/Tab | `"SN\n001"` | code=500 |
+| 布尔值 | `true` | code=500 |
+| 数字类型 | `123456789` | code=500 |
+| 数组类型 | `["SN001"]` | code=500 |
+| 对象类型 | `{"sn": "001"}` | code=500 |
+| 脚本注入 | `<script>alert(1)</script>` | code=500 |
+
 ### 参数取值：边界值 + 等价类，不照搬文档示例
 
 - **禁止照搬文档示例值**——示例值可能超范围或笔误（如 `powerLevelSetting` 示例 `103` 超出声明范围 700~2000、`gridPowerLimitValue` 示例 `3000` 超出 0~800）。一律按字段「取值范围 / 枚举 / 步长」重新设计取值。
@@ -106,3 +146,76 @@ py -3 tests/api/gen_api_negative_cases.py  # 异常/边界
 py -3 -m pytest tests/api -v              # 全部（正常+异常）
 py -3 -m pytest tests/api -k "TC1" -v     # 只跑异常/边界用例（case_id TC1xx）
 ```
+
+## 测试架构：双维度过滤
+
+CSV 支持两个过滤维度，可独立或组合使用：
+
+| 维度 | 字段 | 命令行参数 | 示例值 |
+|------|------|-----------|--------|
+| **设备类型** | `module` | `--module` | household, cygni, juniorbox, commerce, lowvoltage, highvoltage |
+| **功能模块** | `func_module` | `--func-module` | device_info, battery_setting, work_mode, base_setting 等 |
+
+### 功能模块映射（func_module）
+
+| 接口 | func_module |
+|------|-------------|
+| GetDeviceList | device_list |
+| GetDeviceInfBySN | device_info |
+| GetStatusInfBySN | device_status |
+| GetRealTimeDataBySN | realtime_data |
+| GetTotalEnergyDataBySN | energy_data |
+| GetAlarmInfBySN | alarm_info |
+| GetParallelInfBySN | parallel_info |
+| Get/SetBaseSetting | base_setting |
+| Get/SetWorkModeSetting | work_mode |
+| Get/SetBatterySetting | battery_setting |
+| Get/SetLoadControlSetting | load_control |
+| Get/SetPeakControlSetting | peak_control |
+| Get/SetAdvancedSetting | advanced_setting |
+| Get/SetGeneratorControlSetting | generator_control |
+| SetCommerceSystemSetting | commerce_system |
+| SetCommerceBatterySetting | commerce_battery |
+| SetCommerceRunModeSetting | commerce_run_mode |
+| SetCommercePeakValleyPeriodSetting | commerce_peak_valley |
+| SetCommerceAdvancedSetting | commerce_advanced |
+
+### 执行示例
+
+```bat
+# 按设备类型
+py -3 -m pytest tests/api --module=cygni -v
+
+# 按功能模块（所有设备的电池参数用例）
+py -3 -m pytest tests/api --func-module=battery_setting -v
+
+# 组合使用（Cygni 设备的电池参数用例）
+py -3 -m pytest tests/api --module=cygni --func-module=battery_setting -v
+
+# 冒烟测试（核心查询，不下发）
+py -3 -m pytest tests/api --smoke -v
+
+# 多模块组合
+py -3 -m pytest tests/api --func-module=device_info,battery_setting -v
+```
+
+## CSV 字段定义
+
+| 字段 | 说明 |
+|------|------|
+| case_id | 用例编号（正常 TC001~，异常 TC101~） |
+| name | 用例标题 |
+| method | 请求方法（本套接口全 POST） |
+| path | 接口路径（如 `/v2/GetDeviceList`） |
+| headers | 请求头（JSON，通常为空） |
+| params | URL 参数（JSON，通常为空） |
+| body | 请求体 JSON（模板变量 `{{deviceSn}}` 运行时替换） |
+| expected_status | 预期 HTTP 状态码（默认 200） |
+| expected_code | 预期业务码 `code`（正常 200，参数错误 500） |
+| assertions | 断言表达式（JSONPath，`;` 分隔） |
+| description | 备注（测试类型，如「边界外:xxx=999」「枚举值:workMode=0」） |
+| enabled | 1 执行 / 0 跳过 |
+| models | 机型限制（空=全机型；`AquaVolt,SolarCube`=仅这些机型） |
+| module | 设备类型模块（household/cygni/juniorbox/commerce/lowvoltage/highvoltage） |
+| func_module | 功能模块（device_info/battery_setting/work_mode 等） |
+| smoke | 1=冒烟用例 / 0=非冒烟 |

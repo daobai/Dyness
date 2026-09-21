@@ -13,20 +13,69 @@ from pathlib import Path
 OUT = Path(__file__).resolve().parent / "data" / "api_cygni.csv"
 FIELDS = ["case_id", "name", "method", "path", "headers", "params", "body",
           "expected_status", "expected_code", "assertions", "description", "enabled",
-          "models", "module", "smoke"]
+          "models", "module", "func_module", "risk", "smoke"]
 
 SN = "{{deviceSn}}"
 BAD_SN = "NOT_EXIST_SN_000"
 
+# 接口路径 -> 功能模块映射（一级模块/二级模块 层级格式，详见 config/biz_module_tree.md）
+_FUNC_MODULE_MAP = {
+    # 电站中心
+    "GetDeviceList": "电站中心/电站管理",
+    "GetDeviceInfBySN": "电站中心/设备管理",
+    "GetStatusInfBySN": "电站中心/设备管理",
+    "GetRealTimeDataBySN": "电站中心/数据查询",
+    "GetTotalEnergyDataBySN": "电站中心/数据查询",
+    "GetAlarmInfBySN": "电站中心/告警管理",
+    "GetParallelInfBySN": "电站中心/设备管理",
+    # 设备参数配置
+    "GetBaseSetting": "设备参数配置/安规国家设置",
+    "SetBaseSetting": "设备参数配置/安规国家设置",
+    "GetWorkModeSetting": "设备参数配置/工作模式设置",
+    "SetWorkModeSetting": "设备参数配置/工作模式设置",
+    "GetBatterySetting": "设备参数配置/电池参数设置",
+    "SetBatterySetting": "设备参数配置/电池参数设置",
+    "GetLoadControlSetting": "设备参数配置/负载控制设置",
+    "SetLoadControlSetting": "设备参数配置/负载控制设置",
+    "GetPeakControlSetting": "设备参数配置/峰值控制设置",
+    "SetPeakControlSetting": "设备参数配置/峰值控制设置",
+    "GetAdvancedSetting": "设备参数配置/高级参数设置",
+    "SetAdvancedSetting": "设备参数配置/高级参数设置",
+    "GetGeneratorControlSetting": "设备参数配置/发电机控制",
+    "SetGeneratorControlSetting": "设备参数配置/发电机控制",
+}
+
+
+def _get_risk(path, body):
+    """根据接口路径和请求体判断风险等级。"""
+    api_name = path.rstrip("/").split("/")[-1]
+    if not isinstance(body, dict):
+        return ""
+    # 工商业高级设置 - systemReset/reset/faultReset 参数
+    if api_name == "SetCommerceAdvancedSetting":
+        if "systemReset" in body or "reset" in body or "faultReset" in body:
+            return "danger"
+    # 户用高级参数 - systemReset 参数
+    if api_name == "SetAdvancedSetting":
+        if "systemReset" in body:
+            return "danger"
+    return ""
+
+
+def _get_func_module(path):
+    """根据接口路径推断功能模块。"""
+    api_name = path.rstrip("/").split("/")[-1]
+    return _FUNC_MODULE_MAP.get(api_name, "")
+
 
 def c(case_id, name, path, body, assertions, description, enabled="1", models="",
-      expected_code="200", module="cygni", smoke="0"):
+      expected_code="200", module="cygni", risk="", smoke="0"):
     return {
         "case_id": case_id, "name": name, "method": "POST", "path": path,
         "headers": None, "params": None, "body": body,
         "expected_status": 200, "expected_code": expected_code, "assertions": assertions,
         "description": description, "enabled": enabled, "models": models,
-        "module": module, "smoke": smoke,
+        "module": module, "func_module": _get_func_module(path), "risk": risk or _get_risk(path, body), "smoke": smoke,
     }
 
 
@@ -204,6 +253,68 @@ CASES = [
       {"deviceSn": SN, "autoModeStartSoc": "101"}, "", "边界外:autoModeStartSoc=101(最大100)", expected_code="500"),
     c("TC147", "Cygni-发电机-停止SOC越界", "/v2/SetGeneratorControlSetting",
       {"deviceSn": SN, "autoModeStopSoc": "101"}, "", "边界外:autoModeStopSoc=101(最大100)", expected_code="500"),
+    # ===== 发电机控制下发（SetGeneratorControlSetting）=====
+    # generatorWorkMode 枚举覆盖（0/1/2/3）
+    c("TC148", "Cygni-发电机-工作模式=定时", "/v2/SetGeneratorControlSetting",
+      {"deviceSn": SN, "generatorWorkMode": "0", "timingModeSwitch": "1",
+       "timingModeTimeRange": "08:00-12:00", "autoModeStartSoc": "30", "autoModeStopSoc": "80"},
+      "$.code == 200", "枚举值:generatorWorkMode=0(定时)", "200"),
+    c("TC149", "Cygni-发电机-工作模式=自动", "/v2/SetGeneratorControlSetting",
+      {"deviceSn": SN, "generatorWorkMode": "1", "autoModeStartSoc": "30", "autoModeStopSoc": "80",
+       "chargeSettingSwitch": "1", "batteryStartChargeSoc": "25", "batteryStopChargeSoc": "90"},
+      "$.code == 200", "枚举值:generatorWorkMode=1(自动)", "200"),
+    c("TC150", "Cygni-发电机-工作模式=手动", "/v2/SetGeneratorControlSetting",
+      {"deviceSn": SN, "generatorWorkMode": "2"},
+      "$.code == 200", "枚举值:generatorWorkMode=2(手动)", "200"),
+    c("TC151", "Cygni-发电机-工作模式=关闭", "/v2/SetGeneratorControlSetting",
+      {"deviceSn": SN, "generatorWorkMode": "3"},
+      "$.code == 200", "枚举值:generatorWorkMode=3(关闭)", "200"),
+    # timingModeSwitch 枚举覆盖（0/1）
+    c("TC152", "Cygni-发电机-定时开关=关", "/v2/SetGeneratorControlSetting",
+      {"deviceSn": SN, "generatorWorkMode": "0", "timingModeSwitch": "0"},
+      "$.code == 200", "枚举值:timingModeSwitch=0(关)", "200"),
+    c("TC153", "Cygni-发电机-定时开关=开", "/v2/SetGeneratorControlSetting",
+      {"deviceSn": SN, "generatorWorkMode": "0", "timingModeSwitch": "1",
+       "timingModeTimeRange": "08:00-12:00"},
+      "$.code == 200", "枚举值:timingModeSwitch=1(开)", "200"),
+    # chargeSettingSwitch 枚举覆盖（0/1）
+    c("TC154", "Cygni-发电机-充电设置开关=关", "/v2/SetGeneratorControlSetting",
+      {"deviceSn": SN, "generatorWorkMode": "1", "autoModeStartSoc": "30", "autoModeStopSoc": "80",
+       "chargeSettingSwitch": "0"},
+      "$.code == 200", "枚举值:chargeSettingSwitch=0(关)", "200"),
+    c("TC155", "Cygni-发电机-充电设置开关=开", "/v2/SetGeneratorControlSetting",
+      {"deviceSn": SN, "generatorWorkMode": "1", "autoModeStartSoc": "30", "autoModeStopSoc": "80",
+       "chargeSettingSwitch": "1", "batteryStartChargeSoc": "25", "batteryStopChargeSoc": "90"},
+      "$.code == 200", "枚举值:chargeSettingSwitch=1(开)", "200"),
+
+    # ===== 必填字段缺失补充 =====
+    c("TC156", "Cygni-发电机控制下发-缺generatorWorkMode", "/v2/SetGeneratorControlSetting",
+      {"deviceSn": SN}, "", "必填缺失:缺generatorWorkMode", expected_code="500"),
+    c("TC157", "Cygni-电池参数下发-缺onGridDischargeDod", "/v2/SetBatterySetting",
+      {"deviceSn": SN, "offGridDischargeDod": "20", "batteryChargeLimit": "70"},
+      "", "必填缺失:缺onGridDischargeDod", expected_code="500"),
+    c("TC158", "Cygni-峰值控制下发-缺peakControlEnable", "/v2/SetPeakControlSetting",
+      {"deviceSn": SN, "triggerSoc": "20", "timeRange": "17:00-22:00", "peakControlPower": "2000"},
+      "", "必填缺失:缺peakControlEnable", expected_code="500"),
+    c("TC159", "Cygni-负载控制下发-缺loadSwitch", "/v2/SetLoadControlSetting",
+      {"deviceSn": SN, "forceCloseTime": "07:00-17:00", "relayCloseSoc": "70"},
+      "", "必填缺失:缺loadSwitch", expected_code="500"),
+    c("TC160", "Cygni-高级参数下发-缺powerLevelSetting", "/v2/SetAdvancedSetting",
+      {"deviceSn": SN}, "", "必填缺失:缺powerLevelSetting", expected_code="500"),
+    c("TC161", "Cygni-工作模式下发-缺workMode", "/v2/SetWorkModeSetting",
+      {"deviceSn": SN, "workGroups": _wg()}, "", "必填缺失:缺workMode", expected_code="500"),
+
+    # ===== deviceSn 错误参数补充 =====
+    c("TC171", "Cygni-设备信息-deviceSn含特殊字符", "/v2/GetDeviceInfBySN",
+      {"deviceSn": "@#$%^&*()"}, "", "特殊参数:deviceSn含特殊字符", expected_code="500"),
+    c("TC172", "Cygni-设备信息-deviceSn超长字符串", "/v2/GetDeviceInfBySN",
+      {"deviceSn": "A" * 300}, "", "特殊参数:deviceSn超长(300字符)", expected_code="500"),
+    c("TC173", "Cygni-设备信息-deviceSn含空格", "/v2/GetDeviceInfBySN",
+      {"deviceSn": "SN 001 TEST"}, "", "特殊参数:deviceSn含空格", expected_code="500"),
+    c("TC174", "Cygni-设备信息-deviceSn纯数字", "/v2/GetDeviceInfBySN",
+      {"deviceSn": "12345678901234567890"}, "", "特殊参数:deviceSn纯数字", expected_code="500"),
+    c("TC175", "Cygni-设备信息-deviceSn为null字符串", "/v2/GetDeviceInfBySN",
+      {"deviceSn": "null"}, "", "特殊参数:deviceSn='null'字符串", expected_code="500"),
 ]
 
 

@@ -13,27 +13,62 @@ from pathlib import Path
 OUT = Path(__file__).resolve().parent / "data" / "api_juniorbox.csv"
 FIELDS = ["case_id", "name", "method", "path", "headers", "params", "body",
           "expected_status", "expected_code", "assertions", "description", "enabled",
-          "models", "module", "smoke"]
+          "models", "module", "func_module", "risk", "smoke"]
 
 SN = "{{deviceSn}}"
 BAD_SN = "NOT_EXIST_SN_000"
 
+# 接口路径 -> 功能模块映射（一级模块/二级模块 层级格式，详见 config/biz_module_tree.md）
+_FUNC_MODULE_MAP = {
+    # 电站中心
+    "GetDeviceInfBySN": "电站中心/设备管理",
+    "GetRealTimeDataBySN": "电站中心/数据查询",
+    "GetAlarmInfBySN": "电站中心/告警管理",
+    # 设备参数配置
+    "GetBaseSetting": "设备参数配置/安规国家设置",
+    "SetBaseSetting": "设备参数配置/安规国家设置",
+    "GetWorkModeSetting": "设备参数配置/工作模式设置",
+    "SetWorkModeSetting": "设备参数配置/工作模式设置",
+}
+
+
+def _get_risk(path, body):
+    """根据接口路径和请求体判断风险等级。"""
+    api_name = path.rstrip("/").split("/")[-1]
+    if not isinstance(body, dict):
+        return ""
+    # 工商业高级设置 - systemReset/reset/faultReset 参数
+    if api_name == "SetCommerceAdvancedSetting":
+        if "systemReset" in body or "reset" in body or "faultReset" in body:
+            return "danger"
+    # 户用高级参数 - systemReset 参数
+    if api_name == "SetAdvancedSetting":
+        if "systemReset" in body:
+            return "danger"
+    return ""
+
+
+def _get_func_module(path):
+    """根据接口路径推断功能模块。"""
+    api_name = path.rstrip("/").split("/")[-1]
+    return _FUNC_MODULE_MAP.get(api_name, "")
+
 
 def c(case_id, name, path, body, assertions, description, enabled="1", models="",
-      expected_code="200", module="juniorbox", smoke="0"):
+      expected_code="200", module="juniorbox", risk="", smoke="0"):
     return {
         "case_id": case_id, "name": name, "method": "POST", "path": path,
         "headers": None, "params": None, "body": body,
         "expected_status": 200, "expected_code": expected_code, "assertions": assertions,
         "description": description, "enabled": enabled, "models": models,
-        "module": module, "smoke": smoke,
+        "module": module, "func_module": _get_func_module(path), "risk": risk or _get_risk(path, body), "smoke": smoke,
     }
 
 
-def _wg(power="320", state="1", mode="0", batteryWorkGroup=1):
+def _wg(power="320", state="1", mode="0", batteryWorkGroup=1, week="0,1,2,3,4"):
     """生成一组分时工作策略。"""
     return [{"batteryWorkGroup": batteryWorkGroup, "state": state, "mode": mode,
-             "startTime": "08:00", "endTime": "18:00", "power": power, "week": "0,1,2,3,4"}]
+             "startTime": "08:00", "endTime": "18:00", "power": power, "week": week}]
 
 
 CASES = [
@@ -136,6 +171,58 @@ CASES = [
       {"deviceSn": SN, "workGroups": _wg(mode="2")}, "", "边界外:mode=2(枚举0/1)", expected_code="500"),
     c("TC157", "JuniorBox-分时设置缺workGroups", "/v2/SetWorkModeSetting",
       {"deviceSn": SN}, "", "必填缺失:缺workGroups", expected_code="500"),
+
+    # ===== 分时设置：必填字段缺失补充 =====
+    c("TC158", "JuniorBox-分时设置-缺batteryWorkGroup", "/v2/SetWorkModeSetting",
+      {"deviceSn": SN, "workGroups": [{"state": "1", "mode": "0", "startTime": "08:00",
+       "endTime": "18:00", "power": "320", "week": "0,1,2,3,4"}]},
+      "", "必填缺失:缺batteryWorkGroup", expected_code="500"),
+    c("TC159", "JuniorBox-分时设置-缺state", "/v2/SetWorkModeSetting",
+      {"deviceSn": SN, "workGroups": [{"batteryWorkGroup": 1, "mode": "0", "startTime": "08:00",
+       "endTime": "18:00", "power": "320", "week": "0,1,2,3,4"}]},
+      "", "必填缺失:缺state", expected_code="500"),
+    c("TC160", "JuniorBox-分时设置-缺power", "/v2/SetWorkModeSetting",
+      {"deviceSn": SN, "workGroups": [{"batteryWorkGroup": 1, "state": "1", "mode": "0",
+       "startTime": "08:00", "endTime": "18:00", "week": "0,1,2,3,4"}]},
+      "", "必填缺失:缺power", expected_code="500"),
+    c("TC161", "JuniorBox-分时设置-缺startTime", "/v2/SetWorkModeSetting",
+      {"deviceSn": SN, "workGroups": [{"batteryWorkGroup": 1, "state": "1", "mode": "0",
+       "endTime": "18:00", "power": "320", "week": "0,1,2,3,4"}]},
+      "", "必填缺失:缺startTime", expected_code="500"),
+    c("TC162", "JuniorBox-分时设置-缺endTime", "/v2/SetWorkModeSetting",
+      {"deviceSn": SN, "workGroups": [{"batteryWorkGroup": 1, "state": "1", "mode": "0",
+       "startTime": "08:00", "power": "320", "week": "0,1,2,3,4"}]},
+      "", "必填缺失:缺endTime", expected_code="500"),
+    c("TC163", "JuniorBox-基础设置下发-缺powerLimit", "/v2/SetBaseSetting",
+      {"deviceSn": SN, "workMode": "3", "dischargeDepth": "20"},
+      "", "必填缺失:缺powerLimit", expected_code="500"),
+    c("TC164", "JuniorBox-基础设置下发-缺dischargeDepth", "/v2/SetBaseSetting",
+      {"deviceSn": SN, "workMode": "3", "powerLimit": "100"},
+      "", "必填缺失:缺dischargeDepth", expected_code="500"),
+
+    # ===== 枚举覆盖补充：week 字段 =====
+    c("TC165", "JuniorBox-分时设置-week=工作日", "/v2/SetWorkModeSetting",
+      {"deviceSn": SN, "workGroups": [{"batteryWorkGroup": 1, "state": "1", "mode": "0",
+       "startTime": "08:00", "endTime": "18:00", "power": "320", "week": "0,1,2,3,4"}]},
+      "$.code == 200", "枚举值:week=0,1,2,3,4(工作日)", "200"),
+    c("TC166", "JuniorBox-分时设置-week=周末", "/v2/SetWorkModeSetting",
+      {"deviceSn": SN, "workGroups": [{"batteryWorkGroup": 1, "state": "1", "mode": "0",
+       "startTime": "08:00", "endTime": "18:00", "power": "320", "week": "5,6"}]},
+      "$.code == 200", "枚举值:week=5,6(周末)", "200"),
+    c("TC167", "JuniorBox-分时设置-week=全部", "/v2/SetWorkModeSetting",
+      {"deviceSn": SN, "workGroups": [{"batteryWorkGroup": 1, "state": "1", "mode": "0",
+       "startTime": "08:00", "endTime": "18:00", "power": "320", "week": "0,1,2,3,4,5,6"}]},
+      "$.code == 200", "枚举值:week=0,1,2,3,4,5,6(全部)", "200"),
+
+    # ===== deviceSn 错误参数补充 =====
+    c("TC181", "JuniorBox-设备信息-deviceSn含特殊字符", "/v2/GetDeviceInfBySN",
+      {"deviceSn": "!@#$%^&*"}, "", "特殊参数:deviceSn含特殊字符", expected_code="500"),
+    c("TC182", "JuniorBox-设备信息-deviceSn超长字符串", "/v2/GetDeviceInfBySN",
+      {"deviceSn": "B" * 300}, "", "特殊参数:deviceSn超长(300字符)", expected_code="500"),
+    c("TC183", "JuniorBox-设备信息-deviceSn含中文", "/v2/GetDeviceInfBySN",
+      {"deviceSn": "设备SN001"}, "", "特殊参数:deviceSn含中文", expected_code="500"),
+    c("TC184", "JuniorBox-设备信息-deviceSn为数组", "/v2/GetDeviceInfBySN",
+      {"deviceSn": ["SN001", "SN002"]}, "", "特殊参数:deviceSn为数组", expected_code="500"),
 ]
 
 
